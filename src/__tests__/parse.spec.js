@@ -1,0 +1,93 @@
+import { parse } from '../parse'
+import pagePage from './pages/page'
+import performPage from './pages/perform'
+import noresponsePage from './pages/noresponse'
+import choicesPage from './pages/choices'
+import newestPage from './pages/newest'
+import deficitsPage from './pages/deficits'
+import openPage from './pages/open'
+
+const EXPECTED_KEYS = [
+  'word',
+  'pronunciation',
+  'frequence',
+  'rank',
+  'additionalPattern',
+]
+
+describe('parse', () => {
+  describe('explain', () => {
+    it('should have a "type" and a "meanings" and all expected keys in "wordInfo"', () => {
+      const { type, response: { wordInfo, meanings } } = parse(pagePage)
+
+      expect(type).toBe('explain')
+
+      EXPECTED_KEYS.forEach((key) => {
+        expect(wordInfo[key]).toBeTruthy()
+      })
+
+      expect(Array.isArray(meanings)).toBe(true)
+    })
+
+    it('should have all expected keys', () => {
+      const { response: { wordInfo, meanings } } = parse(performPage)
+
+      EXPECTED_KEYS.forEach((key) => {
+        expect(wordInfo[key]).toBeTruthy()
+      })
+
+      expect(Array.isArray(meanings)).toBe(true)
+    })
+
+    it('should parse multiple explains', () => {
+      const { response: { wordInfo, meanings } } = parse(openPage)
+    })
+  })
+
+  describe('noresponse', () => {
+    it('should return "error" type', () => {
+      const { type } = parse(noresponsePage)
+      expect(type).toBe('error')
+    })
+  })
+
+
+  describe('choices', () => {
+    it('should return "choices" type and choices response', () => {
+      const { type, response: { choices } } = parse(choicesPage)
+
+      expect(type).toBe('choices')
+      expect(Array.isArray(choices)).toBe(true)
+      expect(choices[0].words[0].indexOf('tear down')).toBe(0)
+      expect(choices[0].wordType).toBe('v.')
+      expect(choices[1].words[0].indexOf('dismantle')).toBe(0)
+      expect(choices[1].wordType).toBe('vt.')
+    })
+  })
+
+  describe('non_collins_explain', () => {
+    it('should return "non_collins_explain" type', () => {
+      const { type, response: { wordInfo, explains } } = parse(newestPage)
+      const { word, pronunciation } = wordInfo
+
+      expect(word).toBe('newest')
+      expect(pronunciation).toBe('[nju:ɪst]')
+      expect(type).toBe('non_collins_explain')
+      expect(Array.isArray(explains)).toBe(true)
+      expect(explains[0].type).toBe('')
+      expect(explains[0].explain).toBe('最新')
+    })
+
+    it('should return "non_collins_explain" type too', () => {
+      const { type, response: { wordInfo, explains } } = parse(deficitsPage)
+      const { word, pronunciation } = wordInfo
+
+      expect(word).toBe('deficits')
+      expect(pronunciation).toBe("['defɪsɪts]")
+      expect(type).toBe('non_collins_explain')
+      expect(Array.isArray(explains)).toBe(true)
+      expect(explains[0].type).toBe('n')
+      expect(explains[0].explain).toBe('[财政] 赤字，亏损（deficit的复数形式）')
+    })
+  })
+})

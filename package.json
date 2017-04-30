@@ -1,0 +1,89 @@
+{
+  "name": "youdao-collins-chrome-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "rm -rf build && cp -r assets build && node configs/build/cp_assets.js && webpack --config ./configs/build/webpack.prod.js && zip -r -X build.zip build",
+    "dev": "rm -rf build && cp -r assets build && webpack -w --config ./configs/build/webpack.dev.js",
+    "dev:static": "rm -rf dev && mkdir dev && cp assets/dev.html dev/index.html && cp -r assets/fonts dev/fonts && webpack -w --config ./configs/build/webpack.dev.js & http-server dev",
+    "flow": "flow check",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.24.0",
+    "babel-eslint": "^7.2.1",
+    "babel-jest": "^19.0.0",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-transform-async-to-generator": "^6.22.0",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
+    "cheerio-without-node-native": "^0.20.2",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-flowtype": "^2.30.4",
+    "eslint-plugin-flowtype-errors": "^3.0.3",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "flow-bin": "^0.43.1",
+    "http-server": "^0.9.0",
+    "jest": "^19.0.2",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
+    "webpack": "^2.3.2"
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "react"
+    ],
+    "plugins": [
+      "transform-async-to-generator",
+      "transform-flow-strip-types"
+    ]
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": [
+      "airbnb",
+      "plugin:flowtype/recommended"
+    ],
+    "plugins": [
+      "flowtype",
+      "flowtype-errors"
+    ],
+    "rules": {
+      "no-mixed-operators": 0,
+      "flowtype-errors/show-errors": 2,
+      "import/no-extraneous-dependencies": 0,
+      "react/jsx-filename-extension": 0,
+      "react/prefer-stateless-function": 0,
+      "react/no-array-index-key": 0,
+      "react/forbid-prop-types": 0,
+      "react/sort-comp": 0,
+      "react/jsx-no-target-blank": 0,
+      "jsx-a11y/no-static-element-interactions": 0,
+      "import/prefer-default-export": 0,
+      "semi": [
+        2,
+        "never"
+      ]
+    },
+    "env": {
+      "browser": true,
+      "jest": true
+    },
+    "globals": {
+      "chrome": true
+    }
+  },
+  "jest": {
+    "testRegex": "/src/__tests__/.+spec\\.js$"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "manifest_version": 2,
+
+  "name": "柯林斯词典(非官方)",
+  "description": "查询单词柯林斯释义，支持划词翻译，数据来源于有道词典",
+  "version": "1.0",
+
+  "icons": {
+    "16": "./icons/icon16.png",
+    "48": "./icons/icon48.png",
+    "128": "./icons/icon128.png"
+  },
+
+  "browser_action": {
+    "default_icon": "./icons/icon16.png",
+    "default_popup": "popup.html"
+  },
+
+  "background": {
+    "scripts": ["event_page.js"],
+    "persistent": true
+  },
+
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["content_script.js"]
+  }],
+
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+
+  "permissions": [
+    "storage",
+    "activeTab",
+    "http://dict.youdao.com/"
+  ]
+}

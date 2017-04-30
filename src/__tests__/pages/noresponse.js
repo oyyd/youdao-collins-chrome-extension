@@ -1,0 +1,272 @@
+/* eslint-disable */
+module.exports = `
+<!DOCTYPE html>
+
+
+
+				        								<html xmlns="http://www.w3.org/1999/xhtml" class="ua-ch ua-ch-57 ua-wk ua-mac os x">
+<head>
+    <meta name="baidu_union_verify" content="b3b78fbb4a7fb8c99ada6de72aac8a0e">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+    <meta name="robots" content="noindex">
+<meta name="keywords" content="这是一段很长的话"/>
+
+<title>【这是一段很长的话】</title>
+<link rel="shortcut icon" href="http://shared.ydstatic.com/images/favicon.ico" type="image/x-icon"/>
+
+
+<link href="http://shared.ydstatic.com/dict/v2016/result/160621/result-min.css" rel="stylesheet" type="text/css"/>
+<link href="http://shared.ydstatic.com/dict/v2016/result/pad.css" media="screen and (orientation: portrait), screen and (orientation: landscape)" rel="stylesheet" type="text/css">
+<link rel="canonical" href="http://dict.youdao.com/w/这是一段很长的话/"/>
+<link rel="search" type="application/opensearchdescription+xml" title="Yodao Dict" href="plugins/search-provider.xml"/>
+<script type='text/javascript' src='http://shared.ydstatic.com/js/jquery/jquery-1.8.2.min.js'></script>
+</head>
+<body class="t0">
+<!-- 搜索框开始 -->
+    <div id="doc" style="position:relative;zoom:1;">
+    <div class="c-topbar-wrapper">
+        <div class="c-topbar c-subtopbar">
+            <div id="nav" class="c-snav">
+                <a class="topnav" href="http://dict.youdao.com/?keyfrom=dict2.top" target="_blank">词典</a><a class="topnav" href="http://fanyi.youdao.com/?keyfrom=dict2.top" target="_blank">翻译</a><a class="topnav" href="http://xue.youdao.com/?keyfrom=dict2.top" target="_blank">有道精品课</a><a class="topnav" href="http://note.youdao.com/?keyfrom=dict2.top" target="_blank">云笔记</a><a class="topnav" href="http://www.huihui.cn/?keyfrom=dict2.top" target="_blank">惠惠</a><a class="topnav" href="http://www.youdao.com/about/productlist.html?keyfrom=dict2.top" target="_blank">更多产品</a>
+            </div>
+                        <div class="c-sust">
+
+
+                                    <a hidefocus="true" class="login" href="http://account.youdao.com/login?service=dict&back_url=http%3A%2F%2Fdict.youdao.com%2Fsearch%3Fq%3D%25E8%25BF%2599%25E6%2598%25AF%25E4%25B8%2580%25E6%25AE%25B5%25E5%25BE%2588%25E9%2595%25BF%25E7%259A%2584%25E8%25AF%259D%26tab%3Dchn%23keyfrom%3D%24%7Bkeyfrom%7D" rel="nofollow">登录</a>
+                            </div>
+        </div>
+        <div class="c-header">
+            <a class="c-logo" href="/">有道 - 网易旗下搜索</a>
+            <form id="f"  method="get" action="/search" class="c-fm-w" node-type="search">
+                <div id="langSelector" class="langSelector">
+                                                                                                                                            <span id="langText" class="langText">中英</span><span class="aca">▼</span><span class="arrow"></span>
+                    <input type="hidden" id="le" name="le" value="eng" />
+                </div>
+                <span class="s-inpt-w">
+                    <input type="text" class="s-inpt" autocomplete="off" name="q" id="query" onmouseover="this.focus()" onfocus="this.select()" value="这是一段很长的话"/>
+                    <input type="hidden" name="tab" value=""/>
+                    <input type="hidden" name="keyfrom" value="dict2.top"/>
+                    <span id="hnwBtn" class="hand-write"></span>
+                    </span><input type="submit" class="s-btn" value="翻译"/>
+            </form>
+        </div>
+    </div>
+
+<!-- 搜索框结束 -->
+
+<!-- 内容区域 -->
+<div id="scontainer">
+<div id="container">
+    <div id="topImgAd">
+    </div>
+    <div id="results">
+                    <div id="result_navigator" class="result_navigator">
+            <ul class="sub-catalog">
+        <h3>目录</h3>
+        <li class="split"></li>
+                                                                        <li class="nav-21"><a class="nav-js log-js" href="#ydTrans" hidefocus="true" data-4log="dict.nav.fanyi">翻译</a></li>
+                                                                <li class="nav-collins"><a href="http://dict.youdao.com/ugc/" hidefocus="true">网友贡献</a></li>
+                                                    </ul>
+        <div class="dict-votebar">
+            <div class="vote-head">
+                当前查询结果是否对您有帮助
+            </div>
+            <div class="vote-btns">
+                <button class="up" title="有帮助，点个赞">
+                    <i class="icon vote-arrow"></i>
+                    <!-- <span class="count">271</span> -->
+                </button>
+                <button class="down" aria-pressed="false" title="有待改善">
+                    <i class="icon vote-arrow"></i>
+                </button>
+            </div>
+        </div>
+        <a href="#" class="go-top log-js" data-4log="dict.result.nav.top" title="返回顶部">go top</a>
+    </div>
+                <!-- 结果内容 -->
+                            <div id="results-contents" class="results-content">
+
+
+
+
+
+
+                          <link rel="stylesheet" href="http://c.youdao.com/dict/ugc/web/result-ugc.css"/>
+<div id="ugcTrans" class="trans-wrapper trans-tab ugc-trans-head">
+</div>
+<script src="http://c.youdao.com/dict/ugc/web/result-ugc.js"></script>
+
+                                                                                      <div id="ydTrans" class="trans-wrapper">
+<h3>
+    <span class="tabs"><a class="tab-current"><span>有道翻译</span></a></span>
+        <a class="toggle toggleOpen" rel="#fanyiToggle"></a>
+</h3>
+<div id="fanyiToggle">
+ <div class="trans-container">
+ <p>这是一段很长的话</p>
+ <p>This is a long word</p>
+   <p>以上为机器翻译结果，长、整句建议使用 <a class="viaInner" href="http://f.youdao.com?keyfrom=dict.result" target=_blank>人工翻译</a> 。</p>
+ </div>
+</div>
+</div>
+
+                                    </div>
+    </div>
+
+
+<div id="ads" class="ads">
+  <div id="dict-inter" class="dict-inter">
+      </div>
+  <div id="baidu-adv"></div>
+
+  <div id="follow" class="follow">
+    <p class="hd">应用推荐</p>
+    <div class="bd">
+      <iframe src="http://c.youdao.com/www/app.html" frameborder="0"></iframe>
+    </div>
+  </div>
+</div>
+
+                            <div id="rel-search" class="rel-search">
+                                    <p class="addition">相关搜索</p>
+
+                                                            <a class="search-js" style="text-decoration: none;" href="/w/%E4%BB%96%E8%AF%B4%E7%9A%84%E8%AF%9D%E4%BB%A4%E6%88%91%E5%BE%88%E4%B8%8D%E5%BC%80%E5%BF%83/">他说的话令我很不开心</a>
+                                                                                <a class="search-js" style="text-decoration: none;" href="/w/%E4%BB%96%E8%AF%B4%E7%9A%84%E8%AF%9D%E4%BD%BF%E6%88%91%E5%BE%88%E7%94%9F%E6%B0%94/">他说的话使我很生气</a>
+                                                                                <a class="search-js" style="text-decoration: none;" href="/w/lj%3A%E5%A6%82%E6%9E%9C%E8%BF%99%E4%B9%9F%E7%AE%97%E7%9A%84%E8%AF%9D/">lj:如果这也算的话</a>
+                                                                                <a class="search-js" style="text-decoration: none;" href="/w/%E5%A6%82%E6%9E%9C%E6%98%AF%E9%82%A3%E6%A0%B7%E7%9A%84%E8%AF%9D/">如果是那样的话</a>
+                                                                                <a class="search-js" style="text-decoration: none;" href="/w/%E5%A6%82%E6%9E%9C%E6%98%AF%E8%BF%99%E6%A0%B7%E7%9A%84%E8%AF%9D/">如果是这样的话</a>
+                                                                                                                                                                                                                                    </div>
+                <div id="pronounce">
+            <div class="alpha-bg"></div>
+            <div class="pr-content">
+                $firstVoiceSent
+                <div class="pr-source">- 来自原声例句</div>
+            </div>
+        </div>
+</div>
+<div class="c-bsearch" style="zoom:1;">
+</div>
+</div>
+<!-- 内容区域 -->
+
+<div id="c_footer">
+  <div class="wrap">
+            <a href="http://www.youdao.com/about/?keyfrom=dict2.top" rel="nofollow">关于有道</a>
+        <a href="http://dsp.youdao.com/?keyfrom=dict2.top" rel="nofollow">有道智选</a>
+        <a href="http://i.youdao.com/?keyfrom=dict2.top" rel="nofollow">官方博客</a>
+        <a href="http://techblog.youdao.com/?keyfrom=dict2.top" rel="nofollow">技术博客</a>
+        <a href="http://campus.youdao.com/index.php?t1=index?keyfrom=dict2.top" rel="nofollow">诚聘英才</a>
+        <a href="http://shared.youdao.com/www/contactus-page.html?keyfrom=dict2.top" rel="nofollow">联系我们</a>
+        <a href="https://dict.youdao.com/map/index.html?keyfrom=dict2.top">站点地图</a>
+        <a href="http://www.12377.cn/?keyfrom=dict2.top" rel="nofollow">网络举报</a>
+    <span class="c_fcopyright">&copy; 2017 网易公司 <a href="http://www.youdao.com/terms/privacy.html?keyfrom=dict2.top" rel="nofollow">隐私政策</a> <a href="http://www.youdao.com/terms/index.html?keyfrom=dict2.top" rel="nofollow">服务条款</a> 京ICP证080268号</span>
+  </div>
+</div>
+</div>
+<div id="langSelection" class="pm">
+    <ul>
+        <li><a href="#" rel="eng" class="current">中英</a></li>
+        <li><a href="#" rel="fr">中法</a></li>
+        <li><a href="#" rel="ko">中韩</a></li>
+        <li><a href="#" rel="jap">中日</a></li>
+    </ul>
+</div>
+
+<div id="handWrite" class="pm" style="display:none;">
+    <object width="346" height="216" type="application/x-shockwave-flash" id="hnw" data="http://shared.ydstatic.com/dict/v5.16/swf/Hnw.swf">
+        <param name="movie" value="http://shared.ydstatic.com/dict/v5.16/swf/Hnw.swf"/>
+        <param name="menu" value="false"/>
+        <param name="allowScriptAccess" value="always"/>
+    </object>
+</div>
+
+<div id="researchZoon" class="pm">
+    <div class="title">小调查</div>
+    <div class="zoo-content">
+        请问您想要如何调整此模块？
+        <p><input id="upIt" type="radio" name="researchBox" value="up"><label for="upIt">模块上移</label></p>
+        <p><input id="downIt" type="radio" name="researchBox" value="down"><label for="downIt">模块下移</label></p>
+        <p><input id="dontmove" type="radio" name="researchBox" value="stay"><label for="dontmove">不移动</label></p>
+        <div>感谢您的反馈，我们会尽快进行适当修改！</div>
+        <a href="http://survey2.163.com/html/webdict_survey_reorder/paper.html" target="_blank" style="text-decoration: underline;" rel="nofollow">进来说说原因吧</a>
+        <a href="javascript:void(0);" class="submitResult" rel="nofollow">确定</a>
+    </div>
+</div>
+
+<div id="researchZoon21" class="pm">
+    <div class="title">小调查</div>
+    <div class="zoo-content">
+        请问您想要如何调整此模块？
+        <p><input id="upIt21" type="radio" name="researchBox" value="up"><label for="upIt21">模块上移</label></p>
+        <p><input id="downIt21" type="radio" name="researchBox" value="down"><label for="downIt21">模块下移</label></p>
+        <p><input id="dontmove21" type="radio" name="researchBox" value="stay"><label for="dontmove21">不移动</label></p>
+        <div>感谢您的反馈，我们会尽快进行适当修改！</div>
+        <a href="http://survey2.163.com/html/webdict_survey_reorder/paper.html" target="_blank" style="text-decoration: underline;" rel="nofollow">进来说说原因吧</a>
+        <a href="javascript:void(0);" class="submitResult" rel="nofollow">确定</a>
+    </div>
+</div>
+
+<div id="editwordform" style="display:none;">
+    <h3>修改单词</h3>
+    <a href="javascript:void(0);" id="close-editwordform"></a>
+    <form method="post" >
+        <label for="wordbook-word">单词</label>
+        <input id="wordbook-word" type="text" value="" name="word" autocomplete="off" /><span><a id="delword" href="javascript:void(0);">从单词本中删除</a></span>
+        <label for="wordbook-phonetic">音标</label>
+        <input id="wordbook-phonetic" type="text" value="" name="phonetic" />
+        <label for="wordbook-desc">解释</label>
+        <textarea id="wordbook-desc" name="desc" ></textarea>
+        <label style="color:blue;">更多（可不填）</label>
+        <label for="wordbook-tags">分类</label><input id="wordbook-tags" type="text" value="" name="tags" autocomplete="off" />
+        <ul id="tag-select-list">
+        </ul>
+        <div style="text-align:center;"><a id="openwordbook" href="/wordbook/wordlist?keyfrom=smallpic" target="_blank">打开单词本</a><a id="addword" href="javascript:void(0);">提交</a></div>
+    </form>
+</div>
+
+<script type="text/javascript" src="http://shared.ydstatic.com/dict/v2016/160525/autocomplete_json.js"></script>
+<script type="text/javascript">
+    var global = {
+        fromVm:{
+            searchDomain:'youdao.com'
+        }
+    };
+
+
+    function rwt(a, newlink) {
+        try {
+            if (a === window) {
+                a = window.event.srcElement;
+                while (a) {
+                    if (a.href)
+                        break;
+                    a = a.parentNode
+                }
+            }
+            a.href = newlink;
+            a.onmousedown = ""
+        } catch (p) {
+        }
+        return true
+    }
+</script>
+
+<script type="text/javascript" src="http://shared.ydstatic.com/dict/v2016/result/160621/result-min.js"></script>
+<script>
+var _rlog = _rlog || [];
+_rlog.push(["_setAccount" , "dictweb"]);
+_rlog.push(["_addPost" , "page" , "search"]);
+_rlog.push(["_addPost" , "q" , "这是一段很长的话"]);
+</script>
+<script defer src="http://shared.ydstatic.com/js/rlog/v1.js"></script>
+<!-- START NetEase Devilfish 2006 -->
+<script src="http://analytics.163.com/ntes.js" type="text/javascript"></script>
+<script type="text/javascript">
+_ntes_nacc = "yddictweb";
+neteaseTracker();
+</script>
+<!-- END NetEase Devilfish 2006 -->
+</body>
+</html>`
