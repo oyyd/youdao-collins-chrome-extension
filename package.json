@@ -1,6 +1,6 @@
 {
   "name": "youdao-collins-chrome-extension",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -34,6 +34,7 @@
     "flow-bin": "^0.43.1",
     "http-server": "^0.9.0",
     "jest": "^19.0.2",
+    "prop-types": "^15.5.8",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "webpack": "^2.3.2"

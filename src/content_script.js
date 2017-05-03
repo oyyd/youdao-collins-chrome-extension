@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ContentApp from './components/content_app'
 import { styleContainer } from './utils'
-import { getOptions, DEFAULT_ACTIVE_TYPE } from './options'
+import { getOptions } from './options'
 
 const CONTAINER_ID = 'ycce-container'
 
@@ -79,7 +79,7 @@ function getElementLineHeight(node) {
 }
 
 function createSelectionStream(next, options) {
-  const activeType = options.activeType || DEFAULT_ACTIVE_TYPE
+  const activeType = options.activeType
   let isSelecting = false
 
   document.addEventListener('selectionchange', () => {
@@ -110,7 +110,7 @@ function createSelectionStream(next, options) {
     }
 
     if (!isSelecting) {
-      next(true)
+      next(options, true)
       return
     }
 
@@ -120,11 +120,11 @@ function createSelectionStream(next, options) {
 
     isSelecting = false
 
-    next(false)
+    next(options, false)
   })
 }
 
-function render(hide) {
+function render(options, hide) {
   const selection = window.getSelection()
   const position = getPosition(selection)
 
@@ -143,6 +143,7 @@ function render(hide) {
       hide={hide}
       content={content}
       position={position}
+      options={options}
     />,
     containerEle,
   )

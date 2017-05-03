@@ -1,5 +1,6 @@
 // @flow
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Audio from './audio'
 import AddWord from './add_word'
 import icons from './icons'
@@ -7,7 +8,7 @@ import { mainBG, fontS, gapL, gapM, gapS, colorDanger,
   colorMuted, colorWarning, colorPrimary } from './style'
 
 import type { ChoiceResponseType, ExplainResponseType,
-  NonCollinsExplainsResponseType } from '../parse'
+  NonCollinsExplainsResponseType, MachineTranslationResponseType } from '../parse'
 
 const styles = {
   errorP: {
@@ -56,6 +57,12 @@ const styles = {
     marginTop: gapS,
     marginBottom: gapM,
   },
+  warnItems: {
+    backgroundColor: colorWarning,
+    marginBottom: gapM,
+    paddingLeft: 10,
+    color: '#FFF',
+  },
 }
 
 function renderSentence(sentence) {
@@ -101,7 +108,7 @@ function renderMeaning(meaning, index) {
   )
 }
 
-function renderWordBasic(wordInfo, added: boolean, showWordsPage: boolean) {
+function renderWordBasic(wordInfo, added: boolean, showWordsPage: boolean, showNotebook: boolean) {
   const { word, pronunciation, frequence, rank, additionalPattern } = wordInfo
 
   return (
@@ -117,9 +124,11 @@ function renderWordBasic(wordInfo, added: boolean, showWordsPage: boolean) {
       <span style={styles.infoItem}>
         <Audio word={word} defaultAdded={added} />
       </span>
-      <span style={styles.infoItem}>
-        <AddWord word={word} showWordsPage={showWordsPage} />
-      </span>
+      {showNotebook ? (
+        <span style={styles.infoItem}>
+          <AddWord word={word} showWordsPage={showWordsPage} />
+        </span>
+      ) : null}
       {frequence ? (
         <span style={Object.assign({}, styles.infoItem, { color: colorWarning })}>
           {renderFrequence(frequence)}
@@ -139,12 +148,12 @@ function renderWordBasic(wordInfo, added: boolean, showWordsPage: boolean) {
   )
 }
 
-function renderExplain(response: ExplainResponseType, added, showWordsPage) {
+function renderExplain(response: ExplainResponseType, added, showWordsPage, showNotebook) {
   const { meanings, wordInfo } = response
 
   return (
     <div>
-      {renderWordBasic(wordInfo, added, showWordsPage)}
+      {renderWordBasic(wordInfo, added, showWordsPage, showNotebook)}
       <div>
         {meanings.map(renderMeaning)}
       </div>
@@ -182,10 +191,18 @@ function renderChoices(response: ChoiceResponseType, searchWord) {
   )
 }
 
-function renderNonCollins(currentWord, navigate,
-  response?: NonCollinsExplainsResponseType, added?: boolean, showWordsPage?: boolean) {
+function renderNonCollins(
+  currentWord, navigate,
+  response?: NonCollinsExplainsResponseType, added?: boolean,
+  showWordsPage?: boolean, showNotebook?: boolean,
+) {
   const wordBasic = response
-    ? renderWordBasic(response.wordInfo, Boolean(added), Boolean(showWordsPage)) : null
+    ? renderWordBasic(
+      response.wordInfo,
+      Boolean(added),
+      Boolean(showWordsPage),
+      Boolean(showNotebook),
+    ) : null
 
   const responseElement = response ? (
     <div style={{ marginBottom: `${gapL}px` }}>
@@ -212,15 +229,27 @@ function renderNonCollins(currentWord, navigate,
   )
 }
 
+function renderMachineTranslation(response: MachineTranslationResponseType) {
+  const { translation } = response
+
+  return (
+    <div style={Object.assign({}, styles.choiceItem, { marginTop: gapM })}>
+      (机翻) {translation}
+    </div>
+  )
+}
+
 class Detail extends Component {
   defaultProps: {
     currentWord: string,
   };
 
   render() {
-    const { search, currentWord, explain: wordResponse, openLink, showWordsPage } = this.props
+    const { search, currentWord, explain: wordResponse,
+      openLink, showWordsPage, showNotebook } = this.props
     const openCurrentWord = openLink.bind(null, currentWord)
-    const renderErr = renderNonCollins.bind(null, currentWord, openCurrentWord, showWordsPage)
+    const renderErr = renderNonCollins.bind(null, currentWord,
+      openCurrentWord, showWordsPage, showNotebook)
 
     if (!wordResponse) {
       return renderErr()
@@ -229,11 +258,13 @@ class Detail extends Component {
     const { response, type, added } = wordResponse
 
     if (type === 'explain') {
-      return renderExplain(response, added, showWordsPage)
+      return renderExplain(response, added, showWordsPage, showNotebook)
     } else if (type === 'choices') {
       return renderChoices(response, search)
     } else if (type === 'non_collins_explain') {
       return renderNonCollins(currentWord, openCurrentWord, response, added)
+    } else if (type === 'machine_translation') {
+      return renderMachineTranslation(response)
     }
 
     return renderErr()
@@ -248,6 +279,7 @@ Detail.propTypes = {
   search: func.isRequired,
   openLink: func.isRequired,
   showWordsPage: bool.isRequired,
+  showNotebook: bool.isRequired,
 }
 
 // $FlowFixMe

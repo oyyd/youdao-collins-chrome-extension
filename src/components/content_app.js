@@ -1,12 +1,8 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Detail from './detail'
 import { searchWord, openLink } from '../message'
 import { gapS, colorMuted } from './style'
-
-type PositionType = {
-  top: number,
-  left: number,
-}
 
 const WIDTH = 400
 const MAX_HEIGHT = 300
@@ -64,7 +60,7 @@ function getPositionAdjustment(position) {
   }
 }
 
-function getLayoutPosition(position: PositionType, lineHeight) {
+function getLayoutPosition(position, lineHeight) {
   const padHeight = (typeof lineHeight === 'number')
     ? Math.max(ASSUME_LINE_HEIGHT, lineHeight) : ASSUME_LINE_HEIGHT
   const { leftAdjustment } = getPositionAdjustment(position)
@@ -142,7 +138,7 @@ class ContentApp extends Component {
       })
 
       fullfilled = true
-    }).catch((err) => {
+    }).catch((err) => { // eslint-disable-line
       // TODO:
       fullfilled = true
     })
@@ -150,7 +146,7 @@ class ContentApp extends Component {
 
   render() {
     const { search } = this
-    const { lineHeight, hide, position, content } = this.props
+    const { options, lineHeight, hide, position, content } = this.props
     const { explain, isLoading, display } = this.state
 
     if (hide) {
@@ -173,6 +169,7 @@ class ContentApp extends Component {
           <div>正在加载 &quot;{content}&quot; ...</div>
         ) : (
           <Detail
+            showNotebook={options.showNotebook}
             currentWord={content}
             explain={explain}
             search={search}
@@ -192,6 +189,7 @@ ContentApp.propTypes = {
   hide: bool.isRequired,
   position: object.isRequired,
   content: string.isRequired,
+  options: object.isRequired,
 }
 
 ContentApp.defaultProps = {

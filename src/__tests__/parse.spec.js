@@ -6,6 +6,7 @@ import choicesPage from './pages/choices'
 import newestPage from './pages/newest'
 import deficitsPage from './pages/deficits'
 import openPage from './pages/open'
+import sentencePage from './pages/sentence'
 
 const EXPECTED_KEYS = [
   'word',
@@ -41,6 +42,12 @@ describe('parse', () => {
 
     it('should parse multiple explains', () => {
       const { response: { wordInfo, meanings } } = parse(openPage)
+
+      EXPECTED_KEYS.forEach((key) => {
+        expect(wordInfo[key]).toBeTruthy()
+      })
+
+      expect(Array.isArray(meanings)).toBe(true)
     })
   })
 
@@ -50,7 +57,6 @@ describe('parse', () => {
       expect(type).toBe('error')
     })
   })
-
 
   describe('choices', () => {
     it('should return "choices" type and choices response', () => {
@@ -88,6 +94,13 @@ describe('parse', () => {
       expect(Array.isArray(explains)).toBe(true)
       expect(explains[0].type).toBe('n')
       expect(explains[0].explain).toBe('[财政] 赤字，亏损（deficit的复数形式）')
+    })
+
+    it('should return "machine_translation" type and the correspond response', () => {
+      const { type, response } = parse(sentencePage)
+
+      expect(type).toBe('machine_translation')
+      expect(response.translation).toBe('可视化工具的目的是构建可视化。')
     })
   })
 })

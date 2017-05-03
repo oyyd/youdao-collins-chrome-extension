@@ -1,4 +1,8 @@
-export const DEFAULT_ACTIVE_TYPE = 'ALWAYS'
+export const SHOW_NOTEBOOK_OPTIONS = false
+
+const DEFAULT_ACTIVE_TYPE = 'ALWAYS'
+
+const DEFAULT_SHOW_NOTEBOOK = false
 
 export const ACTIVE_TYPES = {
   ALWAYS: '划词即翻译',
@@ -6,13 +10,18 @@ export const ACTIVE_TYPES = {
   NEVER: '禁用划词翻译',
 }
 
+const DEFAULT_OPTIONS = {
+  activeType: DEFAULT_ACTIVE_TYPE,
+  showNotebook: DEFAULT_SHOW_NOTEBOOK,
+}
+
 export function getOptions() {
   return new Promise((resolve) => {
     chrome.storage.sync.get(null, (data) => {
-      let options = {}
+      let options = DEFAULT_OPTIONS
 
       if (Object.hasOwnProperty.call(data, 'options')) {
-        options = data.options
+        options = Object.assign(options, data.options)
       }
 
       resolve(options)

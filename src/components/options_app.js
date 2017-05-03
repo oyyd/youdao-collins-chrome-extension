@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { getOptions, setOptions, DEFAULT_ACTIVE_TYPE, ACTIVE_TYPES } from '../options'
+import { getOptions, setOptions,
+  ACTIVE_TYPES, SHOW_NOTEBOOK_OPTIONS } from '../options'
 import { getWordsPage } from '../words'
 import { colorPrimary } from './style'
 
@@ -51,7 +52,6 @@ class App extends Component {
     this.wordsPage = getWordsPage()
 
     this.saveOptions = this.saveOptions.bind(this)
-    this.changeActiveType = this.changeActiveType.bind(this)
 
     this.state = {
       saveTips: false,
@@ -83,11 +83,11 @@ class App extends Component {
     })
   }
 
-  changeActiveType(activeType) {
+  changeOptions(type, value) {
     const { options } = this.state
 
     const nextOptions = Object.assign({}, options, {
-      activeType,
+      [type]: value,
     })
 
     this.setState({
@@ -96,34 +96,73 @@ class App extends Component {
   }
 
   render() {
-    const { saveOptions, changeActiveType, wordsPage } = this
+    const { saveOptions, wordsPage } = this
     const { saveTips, options, inited } = this.state
+
+    // eslint-disable-next-line
+    const changeActiveType = this.changeOptions.bind(this, 'activeType')
+    // eslint-disable-next-line
+    const changeShowNotebook = this.changeOptions.bind(this, 'showNotebook')
 
     if (!inited) {
       return null
     }
 
-    const activeType = options.activeType || DEFAULT_ACTIVE_TYPE
+    const showNotebook = options.showNotebook
+    const activeType = options.activeType
 
     return (
       <div style={styles.container}>
         <div
           style={Object.assign({}, styles.item, {
-            marginBottom: 10,
+            display: SHOW_NOTEBOOK_OPTIONS ? 'block' : 'none',
           })}
         >
-          打开
-          <a
-            href={wordsPage}
-            target="_blank"
-            style={Object.assign({}, styles.itemTitle, {
-              cursor: 'pointer',
-              color: colorPrimary,
-              textDecoration: 'none',
+          <div
+            style={Object.assign({}, styles.item, {
+              marginBottom: 10,
             })}
           >
-            单词本
-          </a>
+            打开
+            <a
+              href={wordsPage}
+              target="_blank"
+              style={Object.assign({}, styles.itemTitle, {
+                cursor: 'pointer',
+                color: colorPrimary,
+                textDecoration: 'none',
+              })}
+            >
+              单词本
+            </a>
+          </div>
+          <div style={styles.itemTitle}>开启生词本：</div>
+          <div style={styles.activeTypeContainer}>
+            <div
+              style={styles.activeTypeItem}
+              onClick={() => changeShowNotebook(true)}
+            >
+              <input
+                name="showNotebook"
+                type="radio"
+                style={styles.radio}
+                checked={showNotebook}
+              />
+              <span style={styles.label}>开启</span>
+            </div>
+            <div
+              style={styles.activeTypeItem}
+              onClick={() => changeShowNotebook(false)}
+            >
+              <input
+                name="showNotebook"
+                type="radio"
+                style={styles.radio}
+                checked={!showNotebook}
+              />
+              <span style={styles.label}>关闭</span>
+            </div>
+          </div>
         </div>
         <div style={styles.item}>
           <div style={styles.itemTitle}>划词翻译设置：</div>

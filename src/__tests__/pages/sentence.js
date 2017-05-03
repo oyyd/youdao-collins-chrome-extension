@@ -1,25 +1,25 @@
-/* eslint-disable */
+// eslint-disable
 module.exports = `
 <!DOCTYPE html>
 
 
 
-								<html xmlns="http://www.w3.org/1999/xhtml" class="ua-ch ua-ch-51 ua-wk ua-mac os x">
+<html xmlns="http://www.w3.org/1999/xhtml" class="ua-ch ua-ch-51 ua-wk ua-mac os x">
 <head>
     <meta name="baidu_union_verify" content="b3b78fbb4a7fb8c99ada6de72aac8a0e">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
     <meta name="robots" content="noindex">
-<meta name="keywords" content="asdfasbadfasdfasdf"/>
+<meta name="keywords" content="The purpose of a visualization tool is to construct visualizations."/>
 
-<title>【asdfasbadfasdfasdf】什么意思_英语asdfasbadfasdfasdf的翻译_音标_读音_用法_例句_在线翻译_有道词典</title>
+<title>【the_purpose_of_a_visualization_tool_is_to_construct_visualizations.】什么意思_英语the_purpose_of_a_visualization_tool_is_to_construct_visualizations.的翻译_音标_读音_用法_例句_在线翻译_有道词典</title>
 <link rel="shortcut icon" href="http://shared.ydstatic.com/images/favicon.ico" type="image/x-icon"/>
 
 
 <link href="http://shared.ydstatic.com/dict/v2016/result/160621/result-min.css" rel="stylesheet" type="text/css"/>
 <link href="http://shared.ydstatic.com/dict/v2016/result/pad.css" media="screen and (orientation: portrait), screen and (orientation: landscape)" rel="stylesheet" type="text/css">
-<link rel="canonical" href="http://dict.youdao.com/w/asdfasbadfasdfasdf/"/>
+<link rel="canonical" href="http://dict.youdao.com/w/the_purpose_of_a_visualization_tool_is_to_construct_visualizations./"/>
 <link rel="search" type="application/opensearchdescription+xml" title="Yodao Dict" href="plugins/search-provider.xml"/>
 <script type='text/javascript' src='http://shared.ydstatic.com/js/jquery/jquery-1.8.2.min.js'></script>
 </head>
@@ -34,7 +34,7 @@ module.exports = `
                         <div class="c-sust">
 
 
-                                    <a hidefocus="true" class="login" href="http://account.youdao.com/login?service=dict&back_url=http%3A%2F%2Fdict.youdao.com%2Fsearch%3Fq%3Dasdfasbadfasdfasdf%26tab%3D%23keyfrom%3D%24%7Bkeyfrom%7D" rel="nofollow">登录</a>
+                                    <a hidefocus="true" class="login" href="http://account.youdao.com/login?service=dict&back_url=http%3A%2F%2Fdict.youdao.com%2Fsearch%3Fq%3DThe%2Bpurpose%2Bof%2Ba%2Bvisualization%2Btool%2Bis%2Bto%2Bconstruct%2Bvisualizations.%26tab%3D%23keyfrom%3D%24%7Bkeyfrom%7D" rel="nofollow">登录</a>
                             </div>
         </div>
         <div class="c-header">
@@ -45,7 +45,7 @@ module.exports = `
                     <input type="hidden" id="le" name="le" value="eng" />
                 </div>
                 <span class="s-inpt-w">
-                    <input type="text" class="s-inpt" autocomplete="off" name="q" id="query" onmouseover="this.focus()" onfocus="this.select()" value="asdfasbadfasdfasdf"/>
+                    <input type="text" class="s-inpt" autocomplete="off" name="q" id="query" onmouseover="this.focus()" onfocus="this.select()" value="The purpose of a visualization tool is to construct visualizations."/>
                     <input type="hidden" name="tab" value=""/>
                     <input type="hidden" name="keyfrom" value="dict2.top"/>
                     <span id="hnwBtn" class="hand-write"></span>
@@ -63,7 +63,13 @@ module.exports = `
     </div>
     <div id="results">
                     <div id="result_navigator" class="result_navigator">
-            <div class="dict-votebar">
+            <ul class="sub-catalog">
+        <h3>目录</h3>
+        <li class="split"></li>
+                                                                        <li class="nav-21"><a class="nav-js log-js" href="#ydTrans" hidefocus="true" data-4log="dict.nav.fanyi">翻译</a></li>
+                                                                <li class="nav-collins"><a href="http://dict.youdao.com/ugc/" hidefocus="true">网友贡献</a></li>
+                                                    </ul>
+        <div class="dict-votebar">
             <div class="vote-head">
                 当前查询结果是否对您有帮助
             </div>
@@ -77,6 +83,7 @@ module.exports = `
                 </button>
             </div>
         </div>
+        <a href="#" class="go-top log-js" data-4log="dict.result.nav.top" title="返回顶部">go top</a>
     </div>
                 <!-- 结果内容 -->
                             <div id="results-contents" class="results-content">
@@ -91,15 +98,21 @@ module.exports = `
 </div>
 <script src="http://c.youdao.com/dict/ugc/web/result-ugc.js"></script>
 
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <div id="ydTrans" class="trans-wrapper">
+<h3>
+    <span class="tabs"><a class="tab-current"><span>有道翻译</span></a></span>
+        <a class="toggle toggleOpen" rel="#fanyiToggle"></a>
+</h3>
+<div id="fanyiToggle">
+ <div class="trans-container">
+ <p>The purpose of a visualization tool is to construct visualizations.</p>
+ <p>可视化工具的目的是构建可视化。</p>
+ <p>以上为机器翻译结果，长、整句建议使用 <a class="viaInner" href="http://f.youdao.com?keyfrom=dict.result" target=_blank>人工翻译</a> 。</p>
+ </div>
+</div>
+</div>
 
-                     <div class="error-wrapper" style="height:400px">
-                           <div class="error-note">
-        <dl>
-        <dt><a href="http://c.youdao.com/ugc/errorreport.html?q=asdfasbadfasdfasdf">一起做更好的词典,点击贡献您的释义。</a></dt>
-       </dl>
-      </div>
-          </div>
-                    </div>
+                                    </div>
     </div>
 
 
@@ -117,14 +130,8 @@ module.exports = `
 </div>
 
                             <div id="rel-search" class="rel-search">
-                                    <p class="addition">相关搜索</p>
 
-                                                            <a class="search-js" style="text-decoration: none;" href="/w/asdfasdfasdf/">asdfasdfasdf</a>
-                                                                                <a class="search-js" style="text-decoration: none;" href="/w/dfasdfasdf/">dfasdfasdf</a>
-                                                                                <a class="search-js" style="text-decoration: none;" href="/w/sdfasdf/">sdfasdf</a>
-                                                                                <a class="search-js" style="text-decoration: none;" href="/w/sdfsfsd/">sdfsfsd</a>
-                                                                                <a class="search-js" style="text-decoration: none;" href="/w/asfasdf/">asfasdf</a>
-                                                                                                                                                                                                                                    </div>
+                            </div>
                 <div id="pronounce">
             <div class="alpha-bg"></div>
             <div class="pr-content">
@@ -245,7 +252,7 @@ module.exports = `
 var _rlog = _rlog || [];
 _rlog.push(["_setAccount" , "dictweb"]);
 _rlog.push(["_addPost" , "page" , "search"]);
-_rlog.push(["_addPost" , "q" , "asdfasbadfasdfasdf"]);
+_rlog.push(["_addPost" , "q" , "The purpose of a visualization tool is to construct visualizations."]);
 </script>
 <script defer src="http://shared.ydstatic.com/js/rlog/v1.js"></script>
 <!-- START NetEase Devilfish 2006 -->

@@ -51,6 +51,10 @@ export type NonCollinsExplainsResponseType = {
   explains: NonCollinsExplainsType,
 }
 
+export type MachineTranslationResponseType = {|
+  translation: string,
+|}
+
 export type WordResponseType = {|
   type: 'explain',
   response: ExplainResponseType,
@@ -62,9 +66,13 @@ export type WordResponseType = {|
 |} | {|
   type: 'non_collins_explain',
   response: NonCollinsExplainsResponseType,
+|} | {|
+  type: 'machine_translation',
+  response: MachineTranslationResponseType,
 |}
 
 export type ResponseType = 'explain' | 'choices' | 'error'
+  | 'non_collins_explain' | 'machine_translation'
 
 const LINK_REGEXP = /href="(.+)"/
 
@@ -160,6 +168,8 @@ function getType($) {
     return 'choices'
   } else if ($('#phrsListTab .trans-container').length > 0) {
     return 'non_collins_explain'
+  } else if ($('#ydTrans .trans-container').length > 0) {
+    return 'machine_translation'
   }
 
   return 'error'
@@ -248,6 +258,14 @@ function getNonCollinsExplain($): NonCollinsExplainsResponseType {
   }
 }
 
+function getMachineTranslation($): MachineTranslationResponseType {
+  const $container = $('#ydTrans .trans-container p')
+
+  return {
+    translation: $container.eq(1).text(),
+  }
+}
+
 export function parse(html: string): WordResponseType {
   const $ = cheerio.load(html)
 
@@ -269,6 +287,11 @@ export function parse(html: string): WordResponseType {
     return {
       type: 'non_collins_explain',
       response: getNonCollinsExplain($),
+    }
+  } else if (type === 'machine_translation') {
+    return {
+      type: 'machine_translation',
+      response: getMachineTranslation($),
     }
   }
 
