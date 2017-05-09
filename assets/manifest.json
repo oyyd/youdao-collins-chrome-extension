@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
 
-  "name": "柯林斯词典(非官方)",
+  "name": "柯林斯词典",
   "description": "查询单词柯林斯释义，支持划词翻译，数据来源于有道词典",
   "version": "1.0",
 

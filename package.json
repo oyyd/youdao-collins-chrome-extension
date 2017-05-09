@@ -11,7 +11,7 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "author": "",
+  "author": "oyyd <oyydoibh@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.24.0",
