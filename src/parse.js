@@ -182,7 +182,14 @@ function getChoices($): ChoiceResponseType {
 
   $wordGroup.each((index, ele) => {
     const $spans = $(ele).find('span')
-    const wordType = $spans.eq(0).text().trim()
+    const $firstSpan = $spans.eq(0)
+
+    let wordType = ''
+
+    if (!$firstSpan.hasClass('contentTitle')) {
+      wordType = $spans.eq(0).text().trim()
+    }
+
     const $words = $(ele).find('.contentTitle')
     const words = []
 

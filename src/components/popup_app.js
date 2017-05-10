@@ -112,6 +112,7 @@ class Popup extends Component {
               currentWord={currentWord}
               openLink={openLink}
               showWordsPage
+              showNotebook={false}
             />
           </div>
         ) : null}

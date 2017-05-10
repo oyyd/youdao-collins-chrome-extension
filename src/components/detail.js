@@ -10,12 +10,15 @@ import { mainBG, fontS, gapL, gapM, gapS, colorDanger,
 import type { ChoiceResponseType, ExplainResponseType,
   NonCollinsExplainsResponseType, MachineTranslationResponseType } from '../parse'
 
+const SMALL_FONT = 12
+
 const styles = {
   errorP: {
+    fontSize: SMALL_FONT,
     margin: `0 0 ${gapS}px 0`,
   },
   link: {
-    margin: '0',
+    fontSize: SMALL_FONT,
     color: colorPrimary,
     cursor: 'pointer',
   },
@@ -196,7 +199,7 @@ function renderNonCollins(
   response?: NonCollinsExplainsResponseType, added?: boolean,
   showWordsPage?: boolean, showNotebook?: boolean,
 ) {
-  const wordBasic = response
+  const wordBasic = (response && response)
     ? renderWordBasic(
       response.wordInfo,
       Boolean(added),
@@ -221,10 +224,14 @@ function renderNonCollins(
     <div>
       {wordBasic}
       {responseElement}
-      <p style={styles.errorP}>未搜索到柯林斯释义</p>
-      {currentWord ? (
-        <p style={styles.link} onClick={navigate}>去有道搜索&quot;{currentWord}&quot;</p>
-      ) : null}
+      <p style={styles.errorP}>
+        未搜索到柯林斯释义。
+        {currentWord ? (
+          <span style={styles.link} onClick={navigate}>
+            去有道搜索&quot;{currentWord}&quot;
+          </span>
+        ) : null}
+      </p>
     </div>
   )
 }
@@ -249,7 +256,7 @@ class Detail extends Component {
       openLink, showWordsPage, showNotebook } = this.props
     const openCurrentWord = openLink.bind(null, currentWord)
     const renderErr = renderNonCollins.bind(null, currentWord,
-      openCurrentWord, showWordsPage, showNotebook)
+      openCurrentWord, undefined, showWordsPage, showNotebook)
 
     if (!wordResponse) {
       return renderErr()

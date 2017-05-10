@@ -112,6 +112,7 @@ class ContentApp extends Component {
     let fullfilled = false
 
     this.setState({
+      currentWord: word,
       display: false,
       isLoading: true,
     })
@@ -126,7 +127,7 @@ class ContentApp extends Component {
     }, 1000)
 
     searchWord(word).then((res) => {
-      if (word !== this.props.content) {
+      if (word !== this.state.currentWord) {
         return
       }
 
@@ -146,8 +147,8 @@ class ContentApp extends Component {
 
   render() {
     const { search } = this
-    const { options, lineHeight, hide, position, content } = this.props
-    const { explain, isLoading, display } = this.state
+    const { options, lineHeight, hide, position } = this.props
+    const { explain, isLoading, display, currentWord } = this.state
 
     if (hide) {
       return null
@@ -166,11 +167,11 @@ class ContentApp extends Component {
         style={containerStyle}
       >
         {isLoading ? (
-          <div>正在加载 &quot;{content}&quot; ...</div>
+          <div>正在加载 &quot;{currentWord}&quot; ...</div>
         ) : (
           <Detail
             showNotebook={options.showNotebook}
-            currentWord={content}
+            currentWord={currentWord}
             explain={explain}
             search={search}
             openLink={openLink}

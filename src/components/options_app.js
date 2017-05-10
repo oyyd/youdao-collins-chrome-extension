@@ -11,6 +11,12 @@ const styles = {
   container: {
     fontSize: FONT_SIZE,
   },
+  adviseLink: {
+    fontSize: SIZE,
+    textDecoration: 'none',
+    float: 'right',
+    marginTop: 11,
+  },
   item: {
 
   },
@@ -189,12 +195,21 @@ class App extends Component {
           {saveTips ? (
             <div style={styles.saveTips}>保存成功</div>
           ) : null}
-          <button
-            style={styles.saveBtn}
-            onClick={saveOptions}
-          >
-            保存
-          </button>
+          <div>
+            <button
+              style={styles.saveBtn}
+              onClick={saveOptions}
+            >
+              保存
+            </button>
+            <a
+              href="https://github.com/oyyd/youdao-collins-chrome-extension/issues"
+              target="_blank"
+              style={styles.adviseLink}
+            >
+              意见/bug反馈
+            </a>
+          </div>
         </div>
       </div>
     )
