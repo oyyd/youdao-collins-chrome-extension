@@ -2,11 +2,11 @@
 
 [![build](https://api.travis-ci.org/oyyd/youdao-collins-chrome-extension.svg?branch=master)](https://travis-ci.org/oyyd/youdao-collins-chrome-extension)
 
-查询单词的[柯林斯](https://www.collinsdictionary.com/)释义的chrome扩展应用。支持划词翻译，数据来源于有道词典。
+查询英文单词的[柯林斯](https://www.collinsdictionary.com/)释义的chrome扩展应用。支持划词翻译，数据来源于有道词典。
 
-![intro](./pics/intro.webp)
+![intro](https://oyyd.github.io/youdao-collins-chrome-extension/pics/intro.webp)
 
-TODO: store link
+去chrome web store上[下载](https://chrome.google.com/webstore/detail/mkohdjbfagmlcaclajmadgkojelkbbfj/)
 
 ## 功能介绍
 
