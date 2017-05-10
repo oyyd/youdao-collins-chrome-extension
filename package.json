@@ -1,7 +1,7 @@
 {
   "name": "youdao-collins-chrome-extension",
   "version": "1.0.3",
-  "description": "",
+  "description": "A chrome extension to help search english words in collins dict.",
   "main": "index.js",
   "scripts": {
     "build": "rm -rf build && cp -r assets build && node configs/build/cp_assets.js && webpack --config ./configs/build/webpack.prod.js && zip -r -X build.zip build",
@@ -11,6 +11,10 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
+  "keywords": [
+    "collins",
+    "dictionary"
+  ],
   "author": "oyyd <oyydoibh@gmail.com>",
   "license": "MIT",
   "devDependencies": {

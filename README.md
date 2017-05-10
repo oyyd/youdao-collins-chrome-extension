@@ -1,8 +1,10 @@
-# (WIP)youdao-collins-chrome-extension
+# youdao-collins-chrome-extension
 
 [![build](https://api.travis-ci.org/oyyd/youdao-collins-chrome-extension.svg?branch=master)](https://travis-ci.org/oyyd/youdao-collins-chrome-extension)
 
 查询单词的[柯林斯](https://www.collinsdictionary.com/)释义的chrome扩展应用。支持划词翻译，数据来源于有道词典。
+
+![intro](./pics/intro.webp)
 
 TODO: store link
 
@@ -29,15 +31,13 @@ chrome store上已经有很多其他词典来满足一般的英文词语意义�
 
 目前并没有，要比较好地提供可能会让这个扩展的功能本末倒置。或许接入现有成熟应用的生词本是个不错的注意？如果有什么好想法的话，欢迎直接在issue上反馈。
 
-## 程序设计
+## 实现简介
 
 本着一个应用的开发应验总是能帮助到其他踩到坑而又找不到有效信息的开发者的原则，这里简单介绍下这个应用的一些特点。
 
 ### 1. 用React构建UI，全内联样式
 
-React组件的组合和复用能力是我熟悉的前端框架中最优秀的。
-
-![a](a)
+React组件的组合和复用能力非常优秀。
 
 Chrome extension中的[content scripts](https://developer.chrome.com/extensions/content_scripts)中加入的css样式文件会影响当前页面的样式，然而我们往往只是想把这些样式用在自己的扩展上。所以这个扩展直接全部使用了内联样式来进行处理。但即便不是在content scripts这样特殊的运行环境上，我觉得使用react加内联样式也是个好主意。
 
@@ -67,4 +67,4 @@ event page为了节省性能消耗会在没有唤起消息的时候进入idle状
 
 ## LICENSE
 
-MIT
+[MIT](./LICENSE.md)
