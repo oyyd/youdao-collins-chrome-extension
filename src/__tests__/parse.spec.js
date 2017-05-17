@@ -7,6 +7,7 @@ import newestPage from './pages/newest'
 import deficitsPage from './pages/deficits'
 import openPage from './pages/open'
 import sentencePage from './pages/sentence'
+import favorablePage from './pages/favorable'
 
 const EXPECTED_KEYS = [
   'word',
@@ -101,6 +102,17 @@ describe('parse', () => {
 
       expect(type).toBe('machine_translation')
       expect(response.translation).toBe('可视化工具的目的是构建可视化。')
+    })
+  })
+
+  describe('synonyms', () => {
+    it('should get synonyms info if there is', () => {
+      const { type, response } = parse(favorablePage)
+
+      expect(type).toBe('explain')
+      expect(response.synonyms.type).toBe('[美国英语]')
+      expect(response.synonyms.word).toBe('favourable')
+      expect(response.synonyms.href).toBe('/w/favourable/?keyfrom=dict.collins')
     })
   })
 })

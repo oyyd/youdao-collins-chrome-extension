@@ -25,8 +25,15 @@ export type WordInfoType = {|
 
 export type MeaningsType = Array<MeaningType>
 
+export type SynonymsType = {
+  type: string,
+  href: string,
+  word: string,
+}
+
 export type ExplainResponseType = {
   wordInfo: WordInfoType,
+  synonyms: SynonymsType,
   meanings: MeaningsType,
 }
 
@@ -209,6 +216,18 @@ function getChoices($): ChoiceResponseType {
   }
 }
 
+function getSynonyms($) {
+  const $type = $.find('.wt-container>.additional')
+  const type = $type.length > 0 ? $type.text() : ''
+  const $anchor = $.find('.wt-container>a')
+  const href = $anchor.length > 0 ? $anchor.attr('href') : ''
+  const word = $anchor.length > 0 ? $anchor.text() : ''
+
+  return {
+    type, href, word,
+  }
+}
+
 function getExplainResponse($): ExplainResponseType {
   const $collinsContainer = $('.collinsToggle')
 
@@ -218,6 +237,7 @@ function getExplainResponse($): ExplainResponseType {
 
   return {
     wordInfo: getInfo($collinsContainer.find('h4').eq(0)),
+    synonyms: getSynonyms($collinsContainer),
     meanings,
   }
 }

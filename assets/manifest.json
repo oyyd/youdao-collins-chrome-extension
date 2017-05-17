@@ -31,6 +31,15 @@
     "chrome_style": true
   },
 
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Ctrl+Q",
+        "mac": "MacCtrl+Q"
+      }
+    }
+  },
+
   "permissions": [
     "storage",
     "activeTab",

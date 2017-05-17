@@ -1,7 +1,7 @@
 {
   "name": "youdao-collins-chrome-extension",
-  "version": "1.0.3",
-  "description": "A chrome extension to help search english words in collins dict.",
+  "version": "1.0.4",
+  "description": "A chrome extension to help you search english words in collins dict.",
   "main": "index.js",
   "scripts": {
     "build": "rm -rf build && cp -r assets build && node configs/build/cp_assets.js && webpack --config ./configs/build/webpack.prod.js && zip -r -X build.zip build",
@@ -72,6 +72,7 @@
       "react/no-array-index-key": 0,
       "react/forbid-prop-types": 0,
       "react/sort-comp": 0,
+      "react/no-unescaped-entities": 0,
       "react/jsx-no-target-blank": 0,
       "jsx-a11y/no-static-element-interactions": 0,
       "import/prefer-default-export": 0,

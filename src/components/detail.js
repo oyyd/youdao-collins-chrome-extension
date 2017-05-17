@@ -7,12 +7,19 @@ import icons from './icons'
 import { mainBG, fontS, gapL, gapM, gapS, colorDanger,
   colorMuted, colorWarning, colorPrimary } from './style'
 
-import type { ChoiceResponseType, ExplainResponseType,
-  NonCollinsExplainsResponseType, MachineTranslationResponseType } from '../parse'
+import type {
+  ChoiceResponseType, ExplainResponseType,
+  NonCollinsExplainsResponseType, MachineTranslationResponseType,
+  SynonymsType,
+} from '../parse'
 
 const SMALL_FONT = 12
 
 const styles = {
+  synonymsContainer: {
+    marginTop: gapS,
+    fontSize: SMALL_FONT,
+  },
   errorP: {
     fontSize: SMALL_FONT,
     margin: `0 0 ${gapS}px 0`,
@@ -111,52 +118,88 @@ function renderMeaning(meaning, index) {
   )
 }
 
-function renderWordBasic(wordInfo, added: boolean, showWordsPage: boolean, showNotebook: boolean) {
+function renderWordBasic(
+  wordInfo,
+  synonyms: ?SynonymsType,
+  search,
+  added: boolean,
+  showWordsPage: boolean,
+  showNotebook: boolean,
+) {
   const { word, pronunciation, frequence, rank, additionalPattern } = wordInfo
+  let synonymsEle = null
+
+  if (synonyms && synonyms.word) {
+    const { type, word: synonymsWord } = synonyms
+
+    synonymsEle = (
+      <div style={styles.synonymsContainer}>
+        <span>
+          {type || '同义词'} →
+        </span>
+        搜索
+        <a
+          style={styles.link}
+          onClick={() => search(synonymsWord)}
+        >
+          "{synonymsWord}"
+        </a>
+      </div>
+    )
+  }
 
   return (
     <div style={styles.info}>
-      <span style={Object.assign({}, styles.infoItem, { color: colorDanger })}>
-        {word}
-      </span>
-      {pronunciation ? (
-        <span style={Object.assign({}, { fontStyle: 'italic', color: colorMuted }, styles.infoItem)}>
-          {pronunciation}
+      <div>
+        <span style={Object.assign({}, styles.infoItem, { color: colorDanger })}>
+          {word}
         </span>
-      ) : null}
-      <span style={styles.infoItem}>
-        <Audio word={word} defaultAdded={added} />
-      </span>
-      {showNotebook ? (
+        {pronunciation ? (
+          <span style={Object.assign({}, { fontStyle: 'italic', color: colorMuted }, styles.infoItem)}>
+            {pronunciation}
+          </span>
+        ) : null}
         <span style={styles.infoItem}>
-          <AddWord word={word} showWordsPage={showWordsPage} />
+          <Audio word={word} defaultAdded={added} />
         </span>
-      ) : null}
-      {frequence ? (
-        <span style={Object.assign({}, styles.infoItem, { color: colorWarning })}>
-          {renderFrequence(frequence)}
-        </span>
-      ) : null}
-      {rank ? (
-        <span style={Object.assign({}, { fontSize: fontS, fontWeight: 'bold' }, styles.infoItem)}>
-          {rank}
-        </span>
-      ) : null}
-      {additionalPattern ? (
-        <span style={Object.assign({}, { fontSize: fontS, color: colorMuted }, styles.infoItem)}>
-          {additionalPattern}
-        </span>
-      ) : null}
+        {showNotebook ? (
+          <span style={styles.infoItem}>
+            <AddWord word={word} showWordsPage={showWordsPage} />
+          </span>
+        ) : null}
+        {frequence ? (
+          <span style={Object.assign({}, styles.infoItem, { color: colorWarning })}>
+            {renderFrequence(frequence)}
+          </span>
+        ) : null}
+        {rank ? (
+          <span style={Object.assign({}, { fontSize: fontS, fontWeight: 'bold' }, styles.infoItem)}>
+            {rank}
+          </span>
+        ) : null}
+        {additionalPattern ? (
+          <span style={Object.assign({}, { fontSize: fontS, color: colorMuted }, styles.infoItem)}>
+            {additionalPattern}
+          </span>
+        ) : null}
+      </div>
+      {synonymsEle}
     </div>
   )
 }
 
-function renderExplain(response: ExplainResponseType, added, showWordsPage, showNotebook) {
-  const { meanings, wordInfo } = response
+function renderExplain(
+  response: ExplainResponseType,
+  added,
+  showWordsPage,
+  showNotebook,
+  search,
+) {
+  const { meanings, synonyms, wordInfo } = response
 
   return (
     <div>
-      {renderWordBasic(wordInfo, added, showWordsPage, showNotebook)}
+      {renderWordBasic(wordInfo, synonyms, search, added, showWordsPage, showNotebook)}
       <div>
         {meanings.map(renderMeaning)}
       </div>
@@ -202,6 +245,8 @@ function renderNonCollins(
   const wordBasic = (response && response)
     ? renderWordBasic(
       response.wordInfo,
+      null,
+      null,
       Boolean(added),
       Boolean(showWordsPage),
       Boolean(showNotebook),
@@ -265,7 +310,7 @@ class Detail extends Component {
     const { response, type, added } = wordResponse
 
     if (type === 'explain') {
-      return renderExplain(response, added, showWordsPage, showNotebook)
+      return renderExplain(response, added, showWordsPage, showNotebook, search)
     } else if (type === 'choices') {
       return renderChoices(response, search)
     } else if (type === 'non_collins_explain') {
