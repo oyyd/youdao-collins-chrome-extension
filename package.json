@@ -1,6 +1,6 @@
 {
   "name": "youdao-collins-chrome-extension",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A chrome extension to help you search english words in collins dict.",
   "main": "index.js",
   "scripts": {
