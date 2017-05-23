@@ -82,6 +82,12 @@ function getElementLineHeight(node) {
   return parseFloat(res[1])
 }
 
+function isClickContainer(event) {
+  const containerEle = getContainer()
+
+  return containerEle.contains(event.target)
+}
+
 function createSelectionStream(next, options) {
   const activeType = options.activeType
   let isSelecting = false
@@ -105,12 +111,6 @@ function createSelectionStream(next, options) {
   }, false)
 
   const handler = (event, isDBClick) => {
-    const containerEle = getContainer()
-
-    if (containerEle.contains(event.target)) {
-      return
-    }
-
     let shouldDisplay = false
     let activeKeyPressed = null
 
@@ -118,14 +118,13 @@ function createSelectionStream(next, options) {
       activeKeyPressed = getActiveKeyPressed(event)
     }
 
-    shouldDisplay = getShouldDisplay(activeType, activeKeyPressed, isDBClick)
+    shouldDisplay = getShouldDisplay(
+      activeType,
+      activeKeyPressed,
+      isDBClick,
+    )
 
-    if (!isSelecting) {
-      next(options, true)
-      return
-    }
-
-    if (!shouldDisplay) {
+    if (!isSelecting || !shouldDisplay) {
       return
     }
 
@@ -135,10 +134,25 @@ function createSelectionStream(next, options) {
   }
 
   document.addEventListener('dblclick', (event) => {
+    if (activeType !== 'DOUBLE_CLICK' || isClickContainer(event)) {
+      return
+    }
+
     handler(event, true)
   })
 
   document.addEventListener('mouseup', (event) => {
+    const clickContainer = isClickContainer(event)
+
+    if (!isSelecting && !clickContainer) {
+      next(options, true)
+      return
+    }
+
+    if (activeType === 'DOUBLE_CLICK' || clickContainer) {
+      return
+    }
+
     handler(event, false)
   })
 }
