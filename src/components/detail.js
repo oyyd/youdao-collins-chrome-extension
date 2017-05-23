@@ -121,7 +121,7 @@ function renderMeaning(meaning, index) {
 function renderWordBasic(
   wordInfo,
   synonyms: ?SynonymsType,
-  search,
+  search: ?(word: string) => void,
   added: boolean,
   showWordsPage: boolean,
   showNotebook: boolean,
@@ -129,21 +129,28 @@ function renderWordBasic(
   const { word, pronunciation, frequence, rank, additionalPattern } = wordInfo
   let synonymsEle = null
 
-  if (synonyms && synonyms.word) {
-    const { type, word: synonymsWord } = synonyms
+  if (synonyms && Array.isArray(synonyms.words) && synonyms.words.length > 0) {
+    const { type, words: synonymsWords } = synonyms
 
     synonymsEle = (
       <div style={styles.synonymsContainer}>
         <span>
-          {type || '同义词'} →
+          {type || ''} →
         </span>
         搜索
-        <a
-          style={styles.link}
-          onClick={() => search(synonymsWord)}
-        >
-          "{synonymsWord}"
-        </a>
+        {synonymsWords.map(synonymsWord => (
+          <a
+            key={synonymsWord}
+            style={styles.link}
+            onClick={() => {
+              if (typeof search === 'function') {
+                search(synonymsWord)
+              }
+            }}
+          >
+            "{synonymsWord}"
+          </a>
+        ))}
       </div>
     )
   }

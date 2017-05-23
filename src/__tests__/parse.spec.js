@@ -8,6 +8,7 @@ import deficitsPage from './pages/deficits'
 import openPage from './pages/open'
 import sentencePage from './pages/sentence'
 import favorablePage from './pages/favorable'
+import dimensionalPage from './pages/dimensional'
 
 const EXPECTED_KEYS = [
   'word',
@@ -111,8 +112,25 @@ describe('parse', () => {
 
       expect(type).toBe('explain')
       expect(response.synonyms.type).toBe('[美国英语]')
-      expect(response.synonyms.word).toBe('favourable')
-      expect(response.synonyms.href).toBe('/w/favourable/?keyfrom=dict.collins')
+      expect(response.synonyms.words[0]).toBe('favourable')
+      expect(response.synonyms.hrefs[0]).toBe('/w/favourable/?keyfrom=dict.collins')
+    })
+  })
+
+  describe('dimensional', () => {
+    it('should get synonyms with multiple words and hrefs', () => {
+      const { type, response } = parse(dimensionalPage)
+
+      expect(type).toBe('explain')
+      expect(response.synonyms.type).toBe('')
+      expect(response.synonyms.words).toEqual([
+        'two-dimensional',
+        'three-dimensional',
+      ])
+      expect(response.synonyms.hrefs).toEqual([
+        '/w/two-dimensional/?keyfrom=dict.collins',
+        '/w/three-dimensional/?keyfrom=dict.collins',
+      ])
     })
   })
 })

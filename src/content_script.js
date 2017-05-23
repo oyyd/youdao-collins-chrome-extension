@@ -6,13 +6,17 @@ import { getOptions } from './options'
 
 const CONTAINER_ID = 'ycce-container'
 
-function getShouldDisplay(activeType, activeKeyPressed) {
+function getShouldDisplay(activeType, activeKeyPressed, isDBClick) {
   if (activeType === 'NEVER') {
     return false
   }
 
   if (activeType === 'ALWAYS') {
     return true
+  }
+
+  if (activeType === 'DOUBLE_CLICK') {
+    return isDBClick
   }
 
   return activeKeyPressed
@@ -100,14 +104,21 @@ function createSelectionStream(next, options) {
     isSelecting = false
   }, false)
 
-  document.addEventListener('mouseup', (event) => {
-    const activeKeyPressed = getActiveKeyPressed(event)
+  const handler = (event, isDBClick) => {
     const containerEle = getContainer()
-    const shouldDisplay = getShouldDisplay(activeType, activeKeyPressed)
 
     if (containerEle.contains(event.target)) {
       return
     }
+
+    let shouldDisplay = false
+    let activeKeyPressed = null
+
+    if (!isDBClick) {
+      activeKeyPressed = getActiveKeyPressed(event)
+    }
+
+    shouldDisplay = getShouldDisplay(activeType, activeKeyPressed, isDBClick)
 
     if (!isSelecting) {
       next(options, true)
@@ -121,6 +132,14 @@ function createSelectionStream(next, options) {
     isSelecting = false
 
     next(options, false)
+  }
+
+  document.addEventListener('dblclick', (event) => {
+    handler(event, true)
+  })
+
+  document.addEventListener('mouseup', (event) => {
+    handler(event, false)
   })
 }
 

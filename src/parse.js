@@ -25,11 +25,11 @@ export type WordInfoType = {|
 
 export type MeaningsType = Array<MeaningType>
 
-export type SynonymsType = {
+export type SynonymsType = {|
   type: string,
-  href: string,
-  word: string,
-}
+  hrefs: Array<string>,
+  words: Array<string>,
+|}
 
 export type ExplainResponseType = {
   wordInfo: WordInfoType,
@@ -220,11 +220,17 @@ function getSynonyms($) {
   const $type = $.find('.wt-container>.additional')
   const type = $type.length > 0 ? $type.text() : ''
   const $anchor = $.find('.wt-container>a')
-  const href = $anchor.length > 0 ? $anchor.attr('href') : ''
-  const word = $anchor.length > 0 ? $anchor.text() : ''
+  const hrefs = []
+  const words = []
+
+  $anchor.each((index) => {
+    const $ele = $anchor.eq(index)
+    hrefs.push($ele.attr('href') || '')
+    words.push($ele.text() || '')
+  })
 
   return {
-    type, href, word,
+    type, hrefs, words,
   }
 }
 

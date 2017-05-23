@@ -7,6 +7,7 @@ const DEFAULT_SHOW_NOTEBOOK = false
 export const ACTIVE_TYPES = {
   ALWAYS: '划词即翻译',
   KEY_DOWN: '按住(meta/ctrl)键 + 划词时翻译',
+  DOUBLE_CLICK: '双击单词后翻译',
   NEVER: '禁用划词翻译',
 }
 
