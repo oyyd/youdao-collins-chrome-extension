@@ -175,7 +175,7 @@ class ContentApp extends Component {
             explain={explain}
             search={search}
             openLink={openLink}
-            showWordsPage={false}
+            showWordsPage
           />
         )}
       </div>

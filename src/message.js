@@ -1,6 +1,8 @@
 export const EVENTS = {
   SEARCH_WORD: 'SEARCH_WORD',
   OPEN_NEW_TAB: 'OPEN_NEW_TAB',
+  ADD_WORD_SHANBAY: 'ADD_WORD_SHANBAY',
+  CLEAR_SHANBAY_TOKEN: 'CLEAR_SHANBAY_TOKEN',
 }
 
 // event page receives an event
@@ -30,7 +32,6 @@ export function sendMessage(eventName, data) {
   })
 }
 
-
 export function openLink(word) {
   sendMessage(EVENTS.OPEN_NEW_TAB, word)
 }
@@ -39,4 +40,12 @@ export async function searchWord(word) {
   const res = await sendMessage(EVENTS.SEARCH_WORD, word)
 
   return res
+}
+
+export async function addNotebookWord(word) {
+  return sendMessage(EVENTS.ADD_WORD_SHANBAY, word)
+}
+
+export async function clearShanbayToken() {
+  return sendMessage(EVENTS.CLEAR_SHANBAY_TOKEN)
 }

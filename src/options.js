@@ -2,7 +2,7 @@ export const SHOW_NOTEBOOK_OPTIONS = false
 
 const DEFAULT_ACTIVE_TYPE = 'ALWAYS'
 
-const DEFAULT_SHOW_NOTEBOOK = false
+const DEFAULT_SHOW_NOTEBOOK = true
 
 export const ACTIVE_TYPES = {
   ALWAYS: '划词即翻译',

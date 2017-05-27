@@ -3,6 +3,7 @@ import { getOptions, setOptions,
   ACTIVE_TYPES, SHOW_NOTEBOOK_OPTIONS } from '../options'
 import { getWordsPage } from '../words'
 import { colorPrimary } from './style'
+import { clearShanbayToken } from '../message'
 
 const FONT_SIZE = 14
 const SIZE = 12
@@ -15,10 +16,10 @@ const styles = {
     fontSize: SIZE,
     textDecoration: 'none',
     float: 'right',
-    marginTop: 11,
+    marginTop: 16,
   },
   item: {
-
+    marginTop: 10,
   },
   itemTitle: {
 
@@ -46,6 +47,7 @@ const styles = {
     cursor: 'pointer',
   },
   saveTips: {
+    marginTop: 6,
     fontSize: 12,
     color: colorPrimary,
   },
@@ -58,8 +60,10 @@ class App extends Component {
     this.wordsPage = getWordsPage()
 
     this.saveOptions = this.saveOptions.bind(this)
+    this.clearToken = this.clearToken.bind(this)
 
     this.state = {
+      hasClearToken: false,
       saveTips: false,
       inited: false,
       options: null,
@@ -101,9 +105,21 @@ class App extends Component {
     })
   }
 
+  clearToken() {
+    this.setState({
+      hasClearToken: false,
+    })
+
+    clearShanbayToken()
+
+    this.setState({
+      hasClearToken: true,
+    })
+  }
+
   render() {
-    const { saveOptions, wordsPage } = this
-    const { saveTips, options, inited } = this.state
+    const { clearToken, saveOptions, wordsPage } = this
+    const { saveTips, options, inited, hasClearToken } = this.state
 
     // eslint-disable-next-line
     const changeActiveType = this.changeOptions.bind(this, 'activeType')
@@ -119,6 +135,19 @@ class App extends Component {
 
     return (
       <div style={styles.container}>
+        <div style={styles.item}>
+          <div style={styles.itemTitle}>扇贝单词本设置：</div>
+          {hasClearToken ? (
+            <div style={styles.saveTips}>
+              清除成功
+            </div>
+          ) : null}
+          <div style={styles.activeTypeContainer}>
+            <button onClick={clearToken}>
+              清除登录信息
+            </button>
+          </div>
+        </div>
         <div
           style={Object.assign({}, styles.item, {
             display: SHOW_NOTEBOOK_OPTIONS ? 'block' : 'none',
@@ -171,7 +200,9 @@ class App extends Component {
           </div>
         </div>
         <div style={styles.item}>
-          <div style={styles.itemTitle}>划词翻译设置：</div>
+          <div style={styles.itemTitle}>
+            划词翻译设置：
+          </div>
           <div style={styles.activeTypeContainer}>
             {Object.keys(ACTIVE_TYPES).map(type => (
               <div
@@ -193,7 +224,9 @@ class App extends Component {
         <div>
           <div style={{ fontSize: 12, marginTop: 12 }}>保存后重新刷新页面生效</div>
           {saveTips ? (
-            <div style={styles.saveTips}>保存成功</div>
+            <div style={styles.saveTips}>
+              保存成功
+            </div>
           ) : null}
           <div>
             <button

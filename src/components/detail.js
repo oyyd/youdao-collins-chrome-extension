@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import Audio from './audio'
 import AddWord from './add_word'
 import icons from './icons'
+import Tips from './tips'
 import { mainBG, fontS, gapL, gapM, gapS, colorDanger,
   colorMuted, colorWarning, colorPrimary } from './style'
 
@@ -303,7 +304,13 @@ class Detail extends Component {
     currentWord: string,
   };
 
-  render() {
+  constructor(props) {
+    super(props)
+
+    this.flash = null
+  }
+
+  renderContent() {
     const { search, currentWord, explain: wordResponse,
       openLink, showWordsPage, showNotebook } = this.props
     const openCurrentWord = openLink.bind(null, currentWord)
@@ -327,6 +334,19 @@ class Detail extends Component {
     }
 
     return renderErr()
+  }
+
+  render() {
+    const element = this.renderContent()
+
+    return (
+      <div>
+        <Tips
+          ref={tips => (this.flash = tips.flash)}
+        />
+        {element}
+      </div>
+    )
   }
 }
 

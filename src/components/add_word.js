@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import icons from './icons'
-import { getWordsPage, add } from '../words'
+import { addNotebookWord } from '../message'
 
 const styles = {
   container: {
@@ -30,7 +30,6 @@ class AddWord extends Component {
 
     const { defaultAdded } = props
 
-    this.wordsPage = getWordsPage()
     this.addWord = this.addWord.bind(this)
 
     this.state = {
@@ -41,19 +40,27 @@ class AddWord extends Component {
   addWord() {
     const { word } = this.props
 
-    add(word).then(() => {
+    addNotebookWord(word).then((response) => {
+      const { success, msg } = response
+
+      if (!success) {
+        throw new Error(msg)
+      }
+
       this.setState({
         added: true,
       })
+    }).catch((err) => {
+
     })
   }
 
   render() {
-    const { addWord, wordsPage } = this
+    const { addWord } = this
     const { word, showWordsPage } = this.props
     const { added } = this.state
 
-    if (!word || (added && !showWordsPage)) {
+    if (!word || !showWordsPage) {
       return null
     }
 
@@ -73,14 +80,6 @@ class AddWord extends Component {
         ) : null}
       </div>
     )
-
-    if (added) {
-      return (
-        <a href={wordsPage} target="_blank">
-          {content}
-        </a>
-      )
-    }
 
     return (
       <div

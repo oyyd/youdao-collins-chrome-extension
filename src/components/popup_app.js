@@ -20,6 +20,7 @@ const styles = {
     position: 'fixed',
     top: 0,
     left: 0,
+    zIndex: 10,
     display: 'flex',
   },
 }
@@ -112,7 +113,7 @@ class Popup extends Component {
               currentWord={currentWord}
               openLink={openLink}
               showWordsPage
-              showNotebook={false}
+              showNotebook
             />
           </div>
         ) : null}
