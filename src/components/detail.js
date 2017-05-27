@@ -17,6 +17,10 @@ import type {
 const SMALL_FONT = 12
 
 const styles = {
+  container: {
+    transform: 'matrix(1, 0, 0, 1, 1, 1)',
+    position: 'relative',
+  },
   synonymsContainer: {
     marginTop: gapS,
     fontSize: SMALL_FONT,
@@ -123,9 +127,9 @@ function renderWordBasic(
   wordInfo,
   synonyms: ?SynonymsType,
   search: ?(word: string) => void,
-  added: boolean,
   showWordsPage: boolean,
   showNotebook: boolean,
+  flash: () => {},
 ) {
   const { word, pronunciation, frequence, rank, additionalPattern } = wordInfo
   let synonymsEle = null
@@ -168,11 +172,15 @@ function renderWordBasic(
           </span>
         ) : null}
         <span style={styles.infoItem}>
-          <Audio word={word} defaultAdded={added} />
+          <Audio word={word} />
         </span>
         {showNotebook ? (
           <span style={styles.infoItem}>
-            <AddWord word={word} showWordsPage={showWordsPage} />
+            <AddWord
+              word={word}
+              showWordsPage={showWordsPage}
+              flash={flash}
+            />
           </span>
         ) : null}
         {frequence ? (
@@ -198,16 +206,19 @@ function renderWordBasic(
 
 function renderExplain(
   response: ExplainResponseType,
-  added,
   showWordsPage,
   showNotebook,
   search,
+  flash,
 ) {
   const { meanings, synonyms, wordInfo } = response
 
   return (
     <div>
-      {renderWordBasic(wordInfo, synonyms, search, added, showWordsPage, showNotebook)}
+      {renderWordBasic(
+        wordInfo, synonyms, search,
+        showWordsPage, showNotebook, flash,
+      )}
       <div>
         {meanings.map(renderMeaning)}
       </div>
@@ -247,17 +258,18 @@ function renderChoices(response: ChoiceResponseType, searchWord) {
 
 function renderNonCollins(
   currentWord, navigate,
-  response?: NonCollinsExplainsResponseType, added?: boolean,
+  response?: NonCollinsExplainsResponseType,
   showWordsPage?: boolean, showNotebook?: boolean,
+  flash: () => {},
 ) {
   const wordBasic = (response && response)
     ? renderWordBasic(
       response.wordInfo,
       null,
       null,
-      Boolean(added),
       Boolean(showWordsPage),
       Boolean(showNotebook),
+      flash,
     ) : null
 
   const responseElement = response ? (
@@ -289,7 +301,9 @@ function renderNonCollins(
   )
 }
 
-function renderMachineTranslation(response: MachineTranslationResponseType) {
+function renderMachineTranslation(
+  response: MachineTranslationResponseType,
+) {
   const { translation } = response
 
   return (
@@ -302,33 +316,48 @@ function renderMachineTranslation(response: MachineTranslationResponseType) {
 class Detail extends Component {
   defaultProps: {
     currentWord: string,
-  };
+  }
 
-  constructor(props) {
+  refers: any
+  flash: () => {}
+
+  constructor(props: any) {
     super(props)
 
-    this.flash = null
+    this.flash = this.flash.bind(this)
+
+    this.refers = {}
+  }
+
+  flash(msg: string) {
+    this.refers.tips.flash(msg)
   }
 
   renderContent() {
+    const { flash } = this
     const { search, currentWord, explain: wordResponse,
       openLink, showWordsPage, showNotebook } = this.props
     const openCurrentWord = openLink.bind(null, currentWord)
     const renderErr = renderNonCollins.bind(null, currentWord,
-      openCurrentWord, undefined, showWordsPage, showNotebook)
+      openCurrentWord, undefined, showWordsPage,
+      showNotebook, flash,
+    )
 
     if (!wordResponse) {
       return renderErr()
     }
 
-    const { response, type, added } = wordResponse
+    const { response, type } = wordResponse
 
     if (type === 'explain') {
-      return renderExplain(response, added, showWordsPage, showNotebook, search)
+      return renderExplain(response, showWordsPage, showNotebook, search, flash)
     } else if (type === 'choices') {
       return renderChoices(response, search)
     } else if (type === 'non_collins_explain') {
-      return renderNonCollins(currentWord, openCurrentWord, response, added)
+      return renderNonCollins(
+        currentWord, openCurrentWord, response,
+        showWordsPage, showNotebook, flash,
+      )
     } else if (type === 'machine_translation') {
       return renderMachineTranslation(response)
     }
@@ -340,9 +369,9 @@ class Detail extends Component {
     const element = this.renderContent()
 
     return (
-      <div>
+      <div style={styles.container}>
         <Tips
-          ref={tips => (this.flash = tips.flash)}
+          ref={tips => (this.refers.tips = tips)}
         />
         {element}
       </div>

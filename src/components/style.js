@@ -11,6 +11,7 @@ export const colorWarning = '#f0ad4e'
 export const colorPrimary = '#0275d8'
 export const colorSuccess = '#5cb85c'
 export const colorInfo = '#5bc0de'
+export const colorBorder = '#D4D4D5'
 
 export const btn = {
   width: 40,

@@ -1,24 +1,34 @@
 import React, { Component } from 'react'
+import { number } from 'prop-types'
 import { Motion, spring } from 'react-motion'
+import { colorBorder } from './style'
 
 const CONTAINER_HEIGHT = 40
-const ANIMATION_TIME = 1000
+const ANIMATION_TIME = 2000
 
 const styles = {
   popup: {
     position: 'absolute',
     left: 0,
-    top: 0,
     zIndex: 100,
+    width: '100%',
   },
   container: {
-
+    margin: '0 auto',
+    boxSizing: 'border-box',
+    backgroundColor: '#fff',
+    width: '200px',
+    overflow: 'hidden',
+    border: `1px solid ${colorBorder}`,
+    boxShadow: '0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.15)',
   },
 }
 
 class Tips extends Component {
   constructor(props) {
     super(props)
+
+    this.flash = this.flash.bind(this)
 
     this.animationID = 0
 
@@ -55,28 +65,47 @@ class Tips extends Component {
   }
 
   render() {
+    const { top } = this.props
     const { show, content } = this.state
-    const height = show ? CONTAINER_HEIGHT : 0
+    const height = show ? CONTAINER_HEIGHT : spring(0)
+
+    const popupStyle = Object.assign({}, styles.popup, {
+      top,
+    })
 
     return (
       <div
-        style={styles.popup}
+        style={popupStyle}
       >
         <Motion
           defaultStyle={{ height: 0 }}
-          style={{ height: spring(height) }}
+          style={{ height }}
         >
-          {interpolatingStyle => (
-            <div
-              style={Object.assign({}, styles.container, interpolatingStyle)}
-            >
-              {content}
-            </div>
-          )}
+          {(interpolatingStyle) => {
+            // eslint-disable-next-line
+            const { height } = interpolatingStyle
+            const display = height < 2 ? 'none' : 'block'
+
+            return (
+              <div
+                style={Object.assign({ display }, styles.container, interpolatingStyle)}
+              >
+                {content}
+              </div>
+            )
+          }}
         </Motion>
       </div>
     )
   }
+}
+
+Tips.propTypes = {
+  top: number,
+}
+
+Tips.defaultProps = {
+  top: 40,
 }
 
 export default Tips

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import icons from './icons'
 import { addNotebookWord } from '../message'
 
+const SHANBAY_URL = 'https://www.shanbay.com/bdc/learnings/library/'
+
 const styles = {
   container: {
     cursor: 'pointer',
@@ -51,7 +53,7 @@ class AddWord extends Component {
         added: true,
       })
     }).catch((err) => {
-
+      this.props.flash(err.message)
     })
   }
 
@@ -81,8 +83,18 @@ class AddWord extends Component {
       </div>
     )
 
-    return (
+    return added ? (
+      <a
+        title="点击加入扇贝词库"
+        style={styles.container}
+        href={SHANBAY_URL}
+        target="_blank"
+      >
+        {content}
+      </a>
+    ) : (
       <div
+        title="点击加入扇贝词库"
         style={styles.container}
         onClick={addWord}
       >
@@ -92,12 +104,13 @@ class AddWord extends Component {
   }
 }
 
-const { string, bool } = PropTypes
+const { string, bool, func } = PropTypes
 
 AddWord.propTypes = {
   showWordsPage: bool.isRequired,
   word: string,
   defaultAdded: bool,
+  flash: func.isRequired,
 }
 
 AddWord.defaultProps = {
