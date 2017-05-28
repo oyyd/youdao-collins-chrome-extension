@@ -18,7 +18,7 @@ const styles = {
     zIndex: 1000000,
     width: WIDTH,
     maxHeight: MAX_HEIGHT,
-    overflow: 'scroll',
+    overflow: 'auto',
     backgroundColor: '#fff',
   },
 }
