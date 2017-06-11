@@ -80,9 +80,15 @@ class Searcher extends Component {
     this.triggerSearch = this.triggerSearch.bind(this)
     this.shouldSearch = this.shouldSearch.bind(this)
 
+    this.refers = {}
+
     this.state = {
       inputContent: '',
     }
+  }
+
+  componentDidMount() {
+    this.refers.input.focus()
   }
 
   onInputKey(e) {
@@ -112,6 +118,7 @@ class Searcher extends Component {
     return (
       <div style={styles.inputGroup}>
         <input
+          ref={input => (this.refers.input = input)}
           type="text"
           style={styles.input}
           placeholder="请输入单词"

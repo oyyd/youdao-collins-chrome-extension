@@ -6,6 +6,7 @@ import { gapS, colorMuted } from './style'
 
 const WIDTH = 400
 const MAX_HEIGHT = 300
+const PADDING_LEFT = 20
 const ASSUME_LINE_HEIGHT = 20
 const LEFT_PAD_PERCENTAGE = 1 / 3
 
@@ -66,8 +67,9 @@ function getLayoutPosition(position, lineHeight) {
   const { leftAdjustment } = getPositionAdjustment(position)
 
   let { top, left } = position
+  const originLeftPos = left - (WIDTH * LEFT_PAD_PERCENTAGE) - leftAdjustment
 
-  left = Math.max(left - (WIDTH * LEFT_PAD_PERCENTAGE) - leftAdjustment, 0)
+  left = Math.max(originLeftPos, PADDING_LEFT)
   top += padHeight
 
   return {

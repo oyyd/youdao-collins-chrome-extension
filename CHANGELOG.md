@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## v1.1.2
+- 修复：window及linux下打开窗口时聚焦到input上
+
 ## v1.1.1
 - 修复：滚动样式
 
