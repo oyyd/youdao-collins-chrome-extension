@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## v1.1.3
+- 修复：错误使用token导致的无法添加单词
+
 ## v1.1.2
 - 修复：window及linux下打开窗口时聚焦到input上
 

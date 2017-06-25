@@ -74,7 +74,7 @@ async function addWordToShanbay(data, sendRes) {
 
   const { id } = response
 
-  const addWordURL = `${ADD_WORD_URL}?access_token=SO6Hxll9ic4gnDQG0gVOT7fsfogD2C`
+  const addWordURL = `${ADD_WORD_URL}?access_token=${token}`
 
   try {
     response = await fetch(addWordURL, {

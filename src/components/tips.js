@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { number } from 'prop-types'
 import { Motion, spring } from 'react-motion'
-import { colorBorder } from './style'
+import { gapM, gapS, colorBorder } from './style'
 
-const CONTAINER_HEIGHT = 40
+const CONTAINER_HEIGHT = 32
 const ANIMATION_TIME = 2000
 
 const styles = {
@@ -14,6 +14,7 @@ const styles = {
     width: '100%',
   },
   container: {
+    textAlign: 'center',
     margin: '0 auto',
     boxSizing: 'border-box',
     backgroundColor: '#fff',
@@ -22,6 +23,14 @@ const styles = {
     border: `1px solid ${colorBorder}`,
     boxShadow: '0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.15)',
   },
+}
+
+function createPaddingElement(contentString) {
+  return (
+    <div style={{ padding: `${gapS}px ${gapM}px`, fontSize: '14px' }}>
+      {contentString}
+    </div>
+  )
 }
 
 class Tips extends Component {
@@ -90,7 +99,7 @@ class Tips extends Component {
               <div
                 style={Object.assign({ display }, styles.container, interpolatingStyle)}
               >
-                {content}
+                {typeof content === 'string' ? createPaddingElement(content) : content}
               </div>
             )
           }}

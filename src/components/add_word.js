@@ -39,6 +39,10 @@ class AddWord extends Component {
     }
   }
 
+  componentWillMount() {
+
+  }
+
   addWord() {
     const { word } = this.props
 
