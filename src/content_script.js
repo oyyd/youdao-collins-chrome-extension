@@ -175,7 +175,6 @@ function render(options, hide) {
 
   const content = selection.toString().trim()
   if (!options.showContainChinese && hasChinese(content)) {
-    console.log('has chinese')
     return
   }
   const containerEle = getContainer()
