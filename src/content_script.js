@@ -157,6 +157,13 @@ function createSelectionStream(next, options) {
   })
 }
 
+function hasChinese(text) {
+  if (/.*[\u4e00-\u9fa5]+.*$/.test(text)) { // 包含汉字
+    return true
+  }
+  return false
+}
+
 function render(options, hide) {
   const selection = window.getSelection()
   const position = getPosition(selection)
@@ -165,11 +172,14 @@ function render(options, hide) {
     return
   }
 
-  const containerEle = getContainer()
+
   const content = selection.toString().trim()
+  if (!options.showContainChinese && hasChinese(content)) {
+    return
+  }
+  const containerEle = getContainer()
   const node = selection.baseNode
   const lineHeight = getElementLineHeight(node)
-
   ReactDOM.render(
     <ContentApp
       lineHeight={lineHeight}

@@ -125,6 +125,8 @@ class App extends Component {
     const changeActiveType = this.changeOptions.bind(this, 'activeType')
     // eslint-disable-next-line
     const changeShowNotebook = this.changeOptions.bind(this, 'showNotebook')
+    // eslint-disable-next-line
+    const changeShowContainChinese = this.changeOptions.bind(this, 'showContainChinese')
 
     if (!inited) {
       return null
@@ -132,6 +134,7 @@ class App extends Component {
 
     const showNotebook = options.showNotebook
     const activeType = options.activeType
+    const showContainChinese = options.showContainChinese
 
     return (
       <div style={styles.container}>
@@ -219,6 +222,25 @@ class App extends Component {
                 <span style={styles.label}>{ACTIVE_TYPES[type]}</span>
               </div>
             ))}
+          </div>
+        </div>
+        <div style={styles.item}>
+          <div style={styles.itemTitle}>
+            中文翻译设置：
+          </div>
+          <div style={styles.activeTypeContainer}>
+            <div
+              style={styles.activeTypeItem}
+              onClick={() => changeShowContainChinese(!showContainChinese)}
+            >
+              <input
+                name="showContainChinese"
+                type="radio"
+                style={styles.radio}
+                checked={showContainChinese}
+              />
+              <span style={styles.label}>包含中文时显示翻译</span>
+            </div>
           </div>
         </div>
         <div>

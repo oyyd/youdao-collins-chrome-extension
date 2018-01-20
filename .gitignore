@@ -7,3 +7,5 @@ npm-debug.log
 configs/crx.pem
 build.crx
 build.zip
+.history
+.package-lock.json
