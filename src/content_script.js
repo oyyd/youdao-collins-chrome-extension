@@ -155,6 +155,10 @@ function createSelectionStream(next, options) {
 
     handler(event, false)
   })
+  
+  document.addEventListener('keydown',(event)=>{
+    next(options, true)
+  })
 }
 
 function hasChinese(text) {
