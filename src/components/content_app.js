@@ -67,7 +67,7 @@ function getLayoutPosition(position, lineHeight) {
   const { leftAdjustment } = getPositionAdjustment(position)
 
   let { top, left } = position
-  const originLeftPos = left - leftAdjustment
+  const originLeftPos = left - (WIDTH * LEFT_PAD_PERCENTAGE) - leftAdjustment
 
   left = Math.max(originLeftPos, PADDING_LEFT)
   top += padHeight

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import icons from './icons'
 import { addNotebookWord } from '../message'
 
-const SHANBAY_URL = 'https://www.shanbay.com/bdc/review/'
+const SHANBAY_URL = 'https://www.shanbay.com/bdc/learnings/library/'
 
 const styles = {
   container: {
