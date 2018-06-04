@@ -1,21 +1,22 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import ContentApp from './components/content_app'
-import { styleContainer } from './utils'
-import { getOptions } from './options'
+import React from "react"
+import ReactDOM from "react-dom"
+import ContentApp from "./components/content_app"
+import { styleContainer } from "./utils"
+import { getOptions } from "./options"
+import getCaretCoordinates from "textarea-caret"
 
-const CONTAINER_ID = 'ycce-container'
+const CONTAINER_ID = "ycce-container"
 
 function getShouldDisplay(activeType, activeKeyPressed, isDBClick) {
-  if (activeType === 'NEVER') {
+  if (activeType === "NEVER") {
     return false
   }
 
-  if (activeType === 'ALWAYS') {
+  if (activeType === "ALWAYS") {
     return true
   }
 
-  if (activeType === 'DOUBLE_CLICK') {
+  if (activeType === "DOUBLE_CLICK") {
     return isDBClick
   }
 
@@ -23,9 +24,9 @@ function getShouldDisplay(activeType, activeKeyPressed, isDBClick) {
 }
 
 function createContainer() {
-  const containerEle = document.createElement('div')
+  const containerEle = document.createElement("div")
   containerEle.id = CONTAINER_ID
-  containerEle.style.fontSize = '14px'
+  containerEle.style.fontSize = "14px"
 
   styleContainer(containerEle)
 
@@ -40,13 +41,14 @@ function getContainer() {
   }
 
   containerEle = createContainer()
-  document.querySelector('body').appendChild(containerEle)
+  document.querySelector("body").appendChild(containerEle)
 
   return containerEle
 }
 
 function getPosition(selection) {
-  let range = null
+  let range = null,
+    rect
 
   try {
     range = selection.getRangeAt(0)
@@ -54,12 +56,27 @@ function getPosition(selection) {
     return null
   }
 
-  const rect = range.getBoundingClientRect()
+  const elem = range.startContainer.firstElementChild
+  if (elem !== undefined) {
+    if (elem.nodeName == "INPUT" || elem.nodeName == "TEXTAREA") {
+      const { top, left } = elem.getBoundingClientRect()
+      const rectStart = getCaretCoordinates(elem, elem.selectionStart)
+      const rectEnd = getCaretCoordinates(elem, elem.selectionEnd)
+      rect = {
+        top: top + rectEnd.top,
+        left: left + rectEnd.left,
+        width: rectEnd.left - rectStart.left
+      }
+    }
+  } else {
+    rect = range.getBoundingClientRect()
+  }
+
   const { top, left, width } = rect
 
   return {
-    left: left + window.pageXOffset + (width / 2),
-    top: top + window.pageYOffset,
+    left: left + window.pageXOffset + width / 2,
+    top: top + window.pageYOffset
   }
 }
 
@@ -72,7 +89,9 @@ function getActiveKeyPressed(event) {
 
 function getElementLineHeight(node) {
   const ele = node.parentElement
-  const text = window.getComputedStyle(ele, null).getPropertyValue('line-height')
+  const text = window
+    .getComputedStyle(ele, null)
+    .getPropertyValue("line-height")
   const res = /(.+)px/.exec(text)
 
   if (res === null) {
@@ -92,23 +111,27 @@ function createSelectionStream(next, options) {
   const activeType = options.activeType
   let isSelecting = false
 
-  document.addEventListener('selectionchange', () => {
-    const containerEle = getContainer()
-    const selection = window.getSelection()
+  document.addEventListener(
+    "selectionchange",
+    () => {
+      const containerEle = getContainer()
+      const selection = window.getSelection()
 
-    if (containerEle.contains(selection.baseNode)) {
-      return
-    }
+      if (containerEle.contains(selection.baseNode)) {
+        return
+      }
 
-    const content = selection.toString().trim()
+      const content = selection.toString().trim()
 
-    if (content) {
-      isSelecting = true
-      return
-    }
+      if (content) {
+        isSelecting = true
+        return
+      }
 
-    isSelecting = false
-  }, false)
+      isSelecting = false
+    },
+    false
+  )
 
   const handler = (event, isDBClick) => {
     let shouldDisplay = false
@@ -118,11 +141,7 @@ function createSelectionStream(next, options) {
       activeKeyPressed = getActiveKeyPressed(event)
     }
 
-    shouldDisplay = getShouldDisplay(
-      activeType,
-      activeKeyPressed,
-      isDBClick,
-    )
+    shouldDisplay = getShouldDisplay(activeType, activeKeyPressed, isDBClick)
 
     if (!isSelecting || !shouldDisplay) {
       return
@@ -133,15 +152,15 @@ function createSelectionStream(next, options) {
     next(options, false)
   }
 
-  document.addEventListener('dblclick', (event) => {
-    if (activeType !== 'DOUBLE_CLICK' || isClickContainer(event)) {
+  document.addEventListener("dblclick", event => {
+    if (activeType !== "DOUBLE_CLICK" || isClickContainer(event)) {
       return
     }
 
     handler(event, true)
   })
 
-  document.addEventListener('mouseup', (event) => {
+  document.addEventListener("mouseup", event => {
     const clickContainer = isClickContainer(event)
 
     if (!isSelecting && !clickContainer) {
@@ -149,16 +168,21 @@ function createSelectionStream(next, options) {
       return
     }
 
-    if (activeType === 'DOUBLE_CLICK' || clickContainer) {
+    if (activeType === "DOUBLE_CLICK" || clickContainer) {
       return
     }
 
     handler(event, false)
   })
+
+  document.addEventListener("keydown", event => {
+    next(options, true)
+  })
 }
 
 function hasChinese(text) {
-  if (/.*[\u4e00-\u9fa5]+.*$/.test(text)) { // 包含汉字
+  if (/.*[\u4e00-\u9fa5]+.*$/.test(text)) {
+    // 包含汉字
     return true
   }
   return false
@@ -171,7 +195,6 @@ function render(options, hide) {
   if (!position) {
     return
   }
-
 
   const content = selection.toString().trim()
   if (!options.showContainChinese && hasChinese(content)) {
@@ -188,12 +211,12 @@ function render(options, hide) {
       position={position}
       options={options}
     />,
-    containerEle,
+    containerEle
   )
 }
 
 function main() {
-  getOptions().then((options) => {
+  getOptions().then(options => {
     createSelectionStream(render, options)
   })
 }
