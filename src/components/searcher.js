@@ -2,10 +2,28 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import icons from './icons'
 import { btn } from './style'
+import { setOptions, getOptions } from '../options'
 
 const { func, array } = PropTypes
 
+const POINT_SIZE = 16
+const activeColor = '#76E15F'
+const inactiveColor = '#000'
+
 const styles = {
+  activeBtnLight: {
+    display: 'inline-block',
+    width: POINT_SIZE,
+    height: POINT_SIZE,
+    borderRadius: Math.floor(POINT_SIZE / 2),
+  },
+  activeBtn: {
+    width: 30,
+    height: 30,
+    boxSizing: 'border-box',
+    padding: '12px 0 0 6px',
+    cursor: 'pointer',
+  },
   gearIcon: {
     width: 30,
     height: 30,
@@ -79,16 +97,39 @@ class Searcher extends Component {
     this.onInputKey = this.onInputKey.bind(this)
     this.triggerSearch = this.triggerSearch.bind(this)
     this.shouldSearch = this.shouldSearch.bind(this)
+    this.changeTempDisabled = this.changeTempDisabled.bind(this)
 
     this.refers = {}
 
+    this.options = null
+
     this.state = {
       inputContent: '',
+      tempDisabled: false,
     }
   }
 
   componentDidMount() {
     this.refers.input.focus()
+
+    getOptions().then((options) => {
+      const { tempDisabled = false } = options
+
+      this.setState({ tempDisabled })
+      this.options = options
+    })
+  }
+
+  changeTempDisabled() {
+    const { tempDisabled } = this.state
+
+    this.setState({
+      tempDisabled: !tempDisabled,
+    })
+
+    setOptions(Object.assign({}, this.options, {
+      tempDisabled: !tempDisabled,
+    }))
   }
 
   onInputKey(e) {
@@ -108,12 +149,22 @@ class Searcher extends Component {
     const { inputContent } = this.state
 
     search(inputContent)
+
+    // Select all text after triggering search.
+    const { input } = this.refers
+
+    if (!input) {
+      return
+    }
+
+    input.setSelectionRange(0, input.value.length)
   }
 
   render() {
-    const { inputContent } = this.state
+    const { inputContent, tempDisabled } = this.state
     const { onInputKey, triggerSearch, shouldSearch } = this
     const { history, jumpBack } = this.props
+    const activeBtnTitle = tempDisabled ? '划词翻译已经关闭' : '划词翻译已经启用'
 
     return (
       <div style={styles.inputGroup}>
@@ -151,6 +202,17 @@ class Searcher extends Component {
         >
           <img style={styles.searchIcon} src={icons.gear} alt="gear" />
         </span>
+        <div
+          style={styles.activeBtn}
+          onClick={this.changeTempDisabled}
+        >
+          <span
+            title={activeBtnTitle}
+            style={Object.assign(styles.activeBtnLight, {
+              backgroundColor: tempDisabled ? inactiveColor : activeColor,
+            })}
+          />
+        </div>
       </div>
     )
   }

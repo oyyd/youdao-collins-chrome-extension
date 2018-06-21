@@ -14,6 +14,7 @@ export const ACTIVE_TYPES = {
 const DEFAULT_OPTIONS = {
   activeType: DEFAULT_ACTIVE_TYPE,
   showNotebook: DEFAULT_SHOW_NOTEBOOK,
+  tempDisabled: false,
 }
 
 export function getOptions() {

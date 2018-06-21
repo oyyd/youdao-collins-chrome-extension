@@ -1,22 +1,31 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import ContentApp from "./components/content_app"
-import { styleContainer } from "./utils"
-import { getOptions } from "./options"
-import getCaretCoordinates from "textarea-caret"
+import React from 'react'
+import ReactDOM from 'react-dom'
+import getCaretCoordinates from 'textarea-caret'
+import ContentApp from './components/content_app'
+import { styleContainer } from './utils'
+import { getOptions } from './options'
 
-const CONTAINER_ID = "ycce-container"
+const CONTAINER_ID = 'ycce-container'
 
-function getShouldDisplay(activeType, activeKeyPressed, isDBClick) {
-  if (activeType === "NEVER") {
+function getShouldDisplay(
+  activeType,
+  activeKeyPressed,
+  isDBClick,
+  tempDisabled,
+) {
+  if (tempDisabled) {
     return false
   }
 
-  if (activeType === "ALWAYS") {
+  if (activeType === 'NEVER') {
+    return false
+  }
+
+  if (activeType === 'ALWAYS') {
     return true
   }
 
-  if (activeType === "DOUBLE_CLICK") {
+  if (activeType === 'DOUBLE_CLICK') {
     return isDBClick
   }
 
@@ -24,9 +33,9 @@ function getShouldDisplay(activeType, activeKeyPressed, isDBClick) {
 }
 
 function createContainer() {
-  const containerEle = document.createElement("div")
+  const containerEle = document.createElement('div')
   containerEle.id = CONTAINER_ID
-  containerEle.style.fontSize = "14px"
+  containerEle.style.fontSize = '14px'
 
   styleContainer(containerEle)
 
@@ -41,14 +50,14 @@ function getContainer() {
   }
 
   containerEle = createContainer()
-  document.querySelector("body").appendChild(containerEle)
+  document.querySelector('body').appendChild(containerEle)
 
   return containerEle
 }
 
 function getPosition(selection) {
-  let range = null,
-    rect
+  let range = null
+  let rect
 
   try {
     range = selection.getRangeAt(0)
@@ -58,14 +67,14 @@ function getPosition(selection) {
 
   const elem = range.startContainer.firstElementChild
   if (elem !== undefined) {
-    if (elem.nodeName == "INPUT" || elem.nodeName == "TEXTAREA") {
+    if (elem.nodeName === 'INPUT' || elem.nodeName === 'TEXTAREA') {
       const { top, left } = elem.getBoundingClientRect()
       const rectStart = getCaretCoordinates(elem, elem.selectionStart)
       const rectEnd = getCaretCoordinates(elem, elem.selectionEnd)
       rect = {
         top: top + rectEnd.top,
         left: left + rectEnd.left,
-        width: rectEnd.left - rectStart.left
+        width: rectEnd.left - rectStart.left,
       }
     }
   } else {
@@ -76,7 +85,7 @@ function getPosition(selection) {
 
   return {
     left: left + window.pageXOffset + width / 2,
-    top: top + window.pageYOffset
+    top: top + window.pageYOffset,
   }
 }
 
@@ -91,7 +100,7 @@ function getElementLineHeight(node) {
   const ele = node.parentElement
   const text = window
     .getComputedStyle(ele, null)
-    .getPropertyValue("line-height")
+    .getPropertyValue('line-height')
   const res = /(.+)px/.exec(text)
 
   if (res === null) {
@@ -108,11 +117,11 @@ function isClickContainer(event) {
 }
 
 function createSelectionStream(next, options) {
-  const activeType = options.activeType
+  const { activeType, tempDisabled } = options
   let isSelecting = false
 
   document.addEventListener(
-    "selectionchange",
+    'selectionchange',
     () => {
       const containerEle = getContainer()
       const selection = window.getSelection()
@@ -130,7 +139,7 @@ function createSelectionStream(next, options) {
 
       isSelecting = false
     },
-    false
+    false,
   )
 
   const handler = (event, isDBClick) => {
@@ -141,7 +150,12 @@ function createSelectionStream(next, options) {
       activeKeyPressed = getActiveKeyPressed(event)
     }
 
-    shouldDisplay = getShouldDisplay(activeType, activeKeyPressed, isDBClick)
+    shouldDisplay = getShouldDisplay(
+      activeType,
+      activeKeyPressed,
+      isDBClick,
+      tempDisabled,
+    )
 
     if (!isSelecting || !shouldDisplay) {
       return
@@ -152,15 +166,15 @@ function createSelectionStream(next, options) {
     next(options, false)
   }
 
-  document.addEventListener("dblclick", event => {
-    if (activeType !== "DOUBLE_CLICK" || isClickContainer(event)) {
+  document.addEventListener('dblclick', (event) => {
+    if (activeType !== 'DOUBLE_CLICK' || isClickContainer(event)) {
       return
     }
 
     handler(event, true)
   })
 
-  document.addEventListener("mouseup", event => {
+  document.addEventListener('mouseup', (event) => {
     const clickContainer = isClickContainer(event)
 
     if (!isSelecting && !clickContainer) {
@@ -168,15 +182,11 @@ function createSelectionStream(next, options) {
       return
     }
 
-    if (activeType === "DOUBLE_CLICK" || clickContainer) {
+    if (activeType === 'DOUBLE_CLICK' || clickContainer) {
       return
     }
 
     handler(event, false)
-  })
-
-  document.addEventListener("keydown", event => {
-    next(options, true)
   })
 }
 
@@ -197,9 +207,11 @@ function render(options, hide) {
   }
 
   const content = selection.toString().trim()
+
   if (!options.showContainChinese && hasChinese(content)) {
     return
   }
+
   const containerEle = getContainer()
   const node = selection.baseNode
   const lineHeight = getElementLineHeight(node)
@@ -211,12 +223,12 @@ function render(options, hide) {
       position={position}
       options={options}
     />,
-    containerEle
+    containerEle,
   )
 }
 
 function main() {
-  getOptions().then(options => {
+  getOptions().then((options) => {
     createSelectionStream(render, options)
   })
 }
