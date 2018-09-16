@@ -117,7 +117,7 @@ function isClickContainer(event) {
 }
 
 function createSelectionStream(next, options) {
-  const { activeType, tempDisabled } = options
+  const { activeType } = options
   let isSelecting = false
 
   document.addEventListener(
@@ -142,6 +142,7 @@ function createSelectionStream(next, options) {
     false,
   )
 
+  // Handle mouse event to decide should we show popup.
   const handler = (event, isDBClick) => {
     let shouldDisplay = false
     let activeKeyPressed = null
@@ -154,7 +155,7 @@ function createSelectionStream(next, options) {
       activeType,
       activeKeyPressed,
       isDBClick,
-      tempDisabled,
+      options.tempDisabled,
     )
 
     if (!isSelecting || !shouldDisplay) {
@@ -198,6 +199,7 @@ function hasChinese(text) {
   return false
 }
 
+// Render popup
 function render(options, hide) {
   const selection = window.getSelection()
   const position = getPosition(selection)
@@ -229,6 +231,12 @@ function render(options, hide) {
 
 function main() {
   getOptions().then((options) => {
+    chrome.runtime.onMessage.addListener((msg) => {
+      if (msg.type !== 'ycce') {
+        return
+      }
+      options.tempDisabled = msg.tempDisabled
+    })
     createSelectionStream(render, options)
   })
 }

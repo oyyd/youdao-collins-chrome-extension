@@ -60,7 +60,8 @@ const styles = {
     backgroundClip: 'padding-box',
     border: '1px solid rgba(0,0,0,.15)',
     borderRadius: '.25rem',
-    transition: 'border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s',
+    transition:
+      'border-color ease-in-out .15s,box-shadow ease-in-out .15s,-webkit-box-shadow ease-in-out .15s',
     borderBottomRightRadius: 0,
     borderTopRightRadius: 0,
   },
@@ -112,7 +113,7 @@ class Searcher extends Component {
   componentDidMount() {
     this.refers.input.focus()
 
-    getOptions().then((options) => {
+    getOptions().then(options => {
       const { tempDisabled = false } = options
 
       this.setState({ tempDisabled })
@@ -127,9 +128,21 @@ class Searcher extends Component {
       tempDisabled: !tempDisabled,
     })
 
-    setOptions(Object.assign({}, this.options, {
-      tempDisabled: !tempDisabled,
-    }))
+    setOptions(
+      Object.assign({}, this.options, {
+        tempDisabled: !tempDisabled,
+      }),
+    )
+
+    // Tell content_script about that should it disable translating or not.
+    chrome.tabs.query({}, (tabs) => {
+      tabs.forEach((tab) => {
+        chrome.tabs.sendMessage(tab.id, {
+          type: 'ycce',
+          tempDisabled: !tempDisabled,
+        })
+      })
+    })
   }
 
   onInputKey(e) {
@@ -164,7 +177,9 @@ class Searcher extends Component {
     const { inputContent, tempDisabled } = this.state
     const { onInputKey, triggerSearch, shouldSearch } = this
     const { history, jumpBack } = this.props
-    const activeBtnTitle = tempDisabled ? '划词翻译已经关闭' : '划词翻译已经启用'
+    const activeBtnTitle = tempDisabled
+      ? '划词翻译已经关闭'
+      : '划词翻译已经启用'
 
     return (
       <div style={styles.inputGroup}>
@@ -179,33 +194,17 @@ class Searcher extends Component {
           onKeyPress={shouldSearch}
         />
         {history.length > 1 ? (
-          <span
-            style={styles.backBtn}
-            onClick={jumpBack}
-          >
-            <img
-              style={styles.backIcon}
-              src={icons.back}
-              alt="back"
-            />
+          <span style={styles.backBtn} onClick={jumpBack}>
+            <img style={styles.backIcon} src={icons.back} alt="back" />
           </span>
         ) : null}
-        <span
-          style={styles.searchBtn}
-          onClick={triggerSearch}
-        >
+        <span style={styles.searchBtn} onClick={triggerSearch}>
           <img style={styles.searchIcon} src={icons.search} alt="search" />
         </span>
-        <span
-          style={styles.searchBtn}
-          onClick={openOptionsPage}
-        >
+        <span style={styles.searchBtn} onClick={openOptionsPage}>
           <img style={styles.searchIcon} src={icons.gear} alt="gear" />
         </span>
-        <div
-          style={styles.activeBtn}
-          onClick={this.changeTempDisabled}
-        >
+        <div style={styles.activeBtn} onClick={this.changeTempDisabled}>
           <span
             title={activeBtnTitle}
             style={Object.assign(styles.activeBtnLight, {
