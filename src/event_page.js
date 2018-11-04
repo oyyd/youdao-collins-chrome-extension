@@ -49,6 +49,10 @@ function getWord(url) {
   })
 }
 
+function clearShanbayToken() {
+  oauth.clearToken()
+}
+
 async function addWordToShanbay(data, sendRes) {
   // redirect
   if (!oauth.token_valid()) {
@@ -64,6 +68,13 @@ async function addWordToShanbay(data, sendRes) {
   try {
     response = await getWord(searchURL)
   } catch (err) {
+    // 如果token失效，清除token并重新添加
+    if (err.message === 'Invalid token') {
+      clearShanbayToken()
+      await addWordToShanbay(data, sendRes)
+      return
+    }
+
     sendRes({
       success: false,
       msg: err.message,
@@ -107,10 +118,6 @@ async function addWordToShanbay(data, sendRes) {
   sendRes({
     success: true,
   })
-}
-
-function clearShanbayToken() {
-  oauth.clearToken()
 }
 
 function openNewTab(word) {
