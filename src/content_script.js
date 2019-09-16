@@ -71,6 +71,9 @@ function getPosition(selection) {
       const { top, left } = elem.getBoundingClientRect()
       const rectStart = getCaretCoordinates(elem, elem.selectionStart)
       const rectEnd = getCaretCoordinates(elem, elem.selectionEnd)
+      if (!rectEnd) {
+        return null
+      }
       rect = {
         top: top + rectEnd.top,
         left: left + rectEnd.left,

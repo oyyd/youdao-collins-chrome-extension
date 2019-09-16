@@ -1,21 +1,20 @@
 {
   "name": "youdao-collins-chrome-extension",
   "version": "1.2.2",
-  "description":
-    "A chrome extension to help you search english words in collins dict.",
+  "description": "A chrome extension to help you search english words in collins dict.",
   "main": "index.js",
   "scripts": {
-    "build":
-      "rm -rf build && cp -r assets build && node configs/build/cp_assets.js && webpack --config ./configs/build/webpack.prod.js && zip -r -X build.zip build",
-    "dev":
-      "rm -rf build && cp -r assets build && webpack -w --config ./configs/build/webpack.dev.js",
-    "dev:static":
-      "rm -rf dev && mkdir dev && cp assets/dev.html dev/index.html && cp -r assets/fonts dev/fonts && webpack -w --config ./configs/build/webpack.dev.js & http-server dev",
+    "build": "rm -rf build && cp -r assets build && node configs/build/cp_assets.js && webpack --config ./configs/build/webpack.prod.js && zip -r -X build.zip build",
+    "dev": "rm -rf build && cp -r assets build && webpack -w --config ./configs/build/webpack.dev.js",
+    "dev:static": "rm -rf dev && mkdir dev && cp assets/dev.html dev/index.html && cp -r assets/fonts dev/fonts && webpack -w --config ./configs/build/webpack.dev.js & http-server dev",
     "flow": "flow check",
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "keywords": ["collins", "dictionary"],
+  "keywords": [
+    "collins",
+    "dictionary"
+  ],
   "author": "oyyd <oyydoibh@gmail.com>",
   "license": "MIT",
   "devDependencies": {
@@ -37,7 +36,7 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "flow-bin": "^0.43.1",
-    "http-server": "^0.9.0",
+    "http-server": "^0.11.1",
     "jest": "^19.0.2",
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
@@ -47,13 +46,25 @@
     "webpack": "^2.3.2"
   },
   "babel": {
-    "presets": ["es2015", "react"],
-    "plugins": ["transform-async-to-generator", "transform-flow-strip-types"]
+    "presets": [
+      "es2015",
+      "react"
+    ],
+    "plugins": [
+      "transform-async-to-generator",
+      "transform-flow-strip-types"
+    ]
   },
   "eslintConfig": {
     "parser": "babel-eslint",
-    "extends": ["airbnb", "plugin:flowtype/recommended"],
-    "plugins": ["flowtype", "flowtype-errors"],
+    "extends": [
+      "airbnb",
+      "plugin:flowtype/recommended"
+    ],
+    "plugins": [
+      "flowtype",
+      "flowtype-errors"
+    ],
     "rules": {
       "no-mixed-operators": 0,
       "flowtype-errors/show-errors": 2,
@@ -67,7 +78,10 @@
       "react/jsx-no-target-blank": 0,
       "jsx-a11y/no-static-element-interactions": 0,
       "import/prefer-default-export": 0,
-      "semi": [2, "never"]
+      "semi": [
+        2,
+        "never"
+      ]
     },
     "env": {
       "browser": true,

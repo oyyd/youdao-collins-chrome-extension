@@ -45,7 +45,9 @@ class Audio extends Component {
           onClick={playAudio}
         />
         <audio
-          ref={audio => (this.refers.audio = audio)}
+          ref={(audio) => {
+            this.refers.audio = audio
+          }}
           src={url}
           onError={() => this.setState({ hide: true })}
           preload="none"
