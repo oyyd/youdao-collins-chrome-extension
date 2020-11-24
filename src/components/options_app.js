@@ -138,7 +138,10 @@ class App extends Component {
 
     return (
       <div style={styles.container}>
-        <div style={styles.item}>
+        <div
+          style={Object.assign({}, styles.item, {
+            display: 'none'
+          })}>
           <div style={styles.itemTitle}>扇贝单词本设置：</div>
           {hasClearToken ? (
             <div style={styles.saveTips}>
@@ -184,7 +187,7 @@ class App extends Component {
                 name="showNotebook"
                 type="radio"
                 style={styles.radio}
-                checked={showNotebook}
+                defaultChecked={showNotebook}
               />
               <span style={styles.label}>开启</span>
             </div>
@@ -196,7 +199,7 @@ class App extends Component {
                 name="showNotebook"
                 type="radio"
                 style={styles.radio}
-                checked={!showNotebook}
+                defaultChecked={!showNotebook}
               />
               <span style={styles.label}>关闭</span>
             </div>
@@ -217,7 +220,7 @@ class App extends Component {
                   name="activeType"
                   type="radio"
                   style={styles.radio}
-                  checked={activeType === type}
+                  defaultChecked={activeType === type}
                 />
                 <span style={styles.label}>{ACTIVE_TYPES[type]}</span>
               </div>
@@ -237,7 +240,7 @@ class App extends Component {
                 name="showContainChinese"
                 type="radio"
                 style={styles.radio}
-                checked={showContainChinese}
+                defaultChecked={showContainChinese}
               />
               <span style={styles.label}>包含中文时显示翻译</span>
             </div>

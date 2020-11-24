@@ -2,7 +2,7 @@
 
 [![build](https://api.travis-ci.org/oyyd/youdao-collins-chrome-extension.svg?branch=master)](https://travis-ci.org/oyyd/youdao-collins-chrome-extension)
 
-查询英文单词的[柯林斯](https://www.collinsdictionary.com/)释义的chrome扩展应用。支持划词翻译，数据来源于有道词典。接入扇贝生词本，快速记录新单词，方便未来复习。
+查询英文单词的[柯林斯](https://www.collinsdictionary.com/)释义的chrome扩展应用。支持划词翻译，数据来源于有道词典。
 
 ![intro](https://oyyd.github.io/youdao-collins-chrome-extension/pics/intro.webp)
 
@@ -15,7 +15,7 @@
   - 按住(meta/ctrl)键 + 划词时翻译
   - 双击划词翻译
 - 快捷键`ctrl+q`打开右上角浮层，用于搜索单词
-- 搜索成功的单词可以快速加入到扇贝生词本（词库，oauth接入，需要你有扇贝的帐号）中，用于复习
+- <del>搜索成功的单词可以快速加入到扇贝生词本（词库，oauth接入，需要你有扇贝的帐号）中，用于复习</del> *因为扇贝网关闭了 API，此功能不再提供。*
 
 ## 功能介绍
 
@@ -39,7 +39,7 @@ chrome store上已经有很多其他词典来满足一般的英文词语意义�
 
 改扩展的数据源来源于[有道词典](http://dict.youdao.com/)，但并没有通过api访问，而是直接获取页面内容再加工，理论上也就不会被api访问上线次数限制。
 
-### 4. 接入扇贝生词本（词库）
+### 4. <del>接入扇贝生词本（词库）</del> *因为扇贝网关闭了 API，此功能不再提供。*
 
 市面上英语学习的软件不少，扇贝是其中之一。但我个人觉得扇贝是少数在探索如何将软件技术和语言学习有效地结合起来的产品之一，也是这个应用最后选择接入扇贝生词本的重要原因（虽然扇贝的“清空词库”功能是已经实现的功能，但却严格限制用户使用这一点，会让我这样只使用其中部分功能的用户非常费解）。通过生词本，我们每天多花一点时间复习今天碰到的单词。这让这个软件在教育、学习的层面上多了不少价值。
 

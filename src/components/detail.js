@@ -2,7 +2,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Audio from './audio'
-import AddWord from './add_word'
 import icons from './icons'
 import Tips from './tips'
 import { mainBG, fontS, gapL, gapM, gapS, colorDanger,
@@ -128,7 +127,6 @@ function renderWordBasic(
   synonyms: ?SynonymsType,
   search: ?(word: string) => void,
   showWordsPage: boolean,
-  showNotebook: boolean,
   flash: () => {},
 ) {
   const { word, pronunciation, frequence, rank, additionalPattern } = wordInfo
@@ -174,15 +172,7 @@ function renderWordBasic(
         <span style={styles.infoItem}>
           <Audio word={word} />
         </span>
-        {showNotebook ? (
-          <span style={styles.infoItem}>
-            <AddWord
-              word={word}
-              showWordsPage={showWordsPage}
-              flash={flash}
-            />
-          </span>
-        ) : null}
+
         {frequence ? (
           <span style={Object.assign({}, styles.infoItem, { color: colorWarning })}>
             {renderFrequence(frequence)}
@@ -259,7 +249,7 @@ function renderChoices(response: ChoiceResponseType, searchWord) {
 function renderNonCollins(
   currentWord, navigate,
   response?: NonCollinsExplainsResponseType,
-  showWordsPage?: boolean, showNotebook?: boolean,
+  showWordsPage?: boolean,
   flash: () => {},
 ) {
   const wordBasic = (response && response)
@@ -268,7 +258,6 @@ function renderNonCollins(
       null,
       null,
       Boolean(showWordsPage),
-      Boolean(showNotebook),
       flash,
     ) : null
 
@@ -336,11 +325,10 @@ class Detail extends Component {
   renderContent() {
     const { flash } = this
     const { search, currentWord, explain: wordResponse,
-      openLink, showWordsPage, showNotebook } = this.props
+      openLink, showWordsPage } = this.props
     const openCurrentWord = openLink.bind(null, currentWord)
     const renderErr = renderNonCollins.bind(null, currentWord,
-      openCurrentWord, undefined, showWordsPage,
-      showNotebook, flash,
+      openCurrentWord, undefined, showWordsPage, flash,
     )
 
     if (!wordResponse) {
@@ -350,13 +338,13 @@ class Detail extends Component {
     const { response, type } = wordResponse
 
     if (type === 'explain') {
-      return renderExplain(response, showWordsPage, showNotebook, search, flash)
+      return renderExplain(response, showWordsPage, search, flash)
     } else if (type === 'choices') {
       return renderChoices(response, search)
     } else if (type === 'non_collins_explain') {
       return renderNonCollins(
         currentWord, openCurrentWord, response,
-        showWordsPage, showNotebook, flash,
+        showWordsPage, flash,
       )
     } else if (type === 'machine_translation') {
       return renderMachineTranslation(response)
@@ -386,8 +374,7 @@ Detail.propTypes = {
   explain: object,
   search: func.isRequired,
   openLink: func.isRequired,
-  showWordsPage: bool.isRequired,
-  showNotebook: bool.isRequired,
+  showWordsPage: bool.isRequired
 }
 
 // $FlowFixMe
