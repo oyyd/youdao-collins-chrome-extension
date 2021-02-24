@@ -46,17 +46,14 @@ export const notify = (opt = {title: '人丑多读书', message: '少壮不努�
  * */
 const request = (url, options = {}) => {
   options = Object.assign(options, { credentials: 'include' })
-  return fetch(url, options)
-    .then(res => {
+  return fetch(url, options).then(res => {
       if (res.ok) {
         if (options.type === 'buffer') return res.arrayBuffer()
         return res.json()
       } else {
         return Promise.reject(res.json ? res.json() : res.text())
       }
-    })
-    // .catch(e => debugLogger('error', `[${new Date().toLocaleDateString()}] fetch failed ${options.method || 'GET'} ${url} ${JSON.stringify(e)}`))
-    .catch(e => {
+    }).catch(e => {
       if (e.status === 400) {
         notify({
           title: '扇贝认证失败',
