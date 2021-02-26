@@ -5,7 +5,7 @@ import icons from './icons'
 const { string } = PropTypes
 
 function getAudioURL(word, type = 1) {
-  return `http://dict.youdao.com/dictvoice?audio=${word}&type=${type}`
+  return `https://dict.youdao.com/dictvoice?audio=${word}&type=${type}`
 }
 
 class Audio extends Component {

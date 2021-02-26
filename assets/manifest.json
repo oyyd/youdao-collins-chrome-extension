@@ -44,6 +44,7 @@
     "storage",
     "activeTab",
     "tabs",
+    "notifications",
     "http://dict.youdao.com/",
     "https://api.shanbay.com/"
   ]
