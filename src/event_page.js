@@ -38,8 +38,12 @@ async function addWordToShanbay(data, sendRes) {
 
     sendRes({ success: true })
   } catch (err) {
-    sendRes({ success: false, msg: 'Invalid Token!' })
+    if (err.msg == "单词没找到") {
+      sendRes({ success: false, msg: 'Shabay: Word Not Found!' })
+      return
+    }
 
+    sendRes({ success: false, msg: 'Invalid Token!' })
     notify({
       title: '扇贝认证失败！',
       message: '登录后才能使用生词本功能。\n点击此消息前往扇贝登录',
