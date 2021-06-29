@@ -84,6 +84,8 @@ function getPosition(selection) {
     rect = range.getBoundingClientRect()
   }
 
+  if (!rect) return
+
   const { top, left, width } = rect
 
   return {
