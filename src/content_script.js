@@ -235,6 +235,14 @@ function render(options, hide) {
 
 function main() {
   getOptions().then((options) => {
+    window.addEventListener('message', ({data})=>{
+        if (!data || data.type !== 'ycce') {
+            return
+        }
+        if(data.action == 'hide') {
+            render(options, true)
+        }
+    })
     chrome.runtime.onMessage.addListener((msg) => {
       if (msg.type !== 'ycce') {
         return
