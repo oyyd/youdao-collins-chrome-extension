@@ -43,7 +43,6 @@
   "permissions": [
     "storage",
     "activeTab",
-    "tabs",
     "http://dict.youdao.com/",
     "https://api.shanbay.com/"
   ]
